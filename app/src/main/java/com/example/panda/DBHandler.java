@@ -1,0 +1,170 @@
+package com.example.panda;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+
+
+public class DBHandler extends SQLiteOpenHelper {
+    // Database properties
+    private static final String DATABASE_NAME = "pandaDB";
+    private static final String TABLE_NAME = "Events";
+    private static final int DATABASE_VERSION = 1;
+
+    private Cursor cursor;
+    private ContentValues values;
+
+
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_DESC = "description";
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_LINK = "website_link";
+    // public static final String KEY_DATE_START = "date_start";
+    // public static final String KEY_DATE_END = "date_end";
+
+    public static final String QUERY_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
+                                                + KEY_ID + " INTEGER primary key autoincrement,"
+                                                + KEY_NAME + " TEXT, "
+                                                + KEY_DESC + " TEXT, "
+                                                + KEY_ADDRESS + " TEXT, "
+                                                + KEY_LINK + " TEXT"
+                                                + ");";
+
+
+    private ArrayList<Event> Events;
+
+
+
+    public DBHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(QUERY_CREATE_TABLE);
+    }
+
+
+    //if older db version exists, drop it and replace
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        if (oldVersion >= newVersion) return;
+
+        Log.d("SQLiteDemo", "onUpgrade: Version = " + newVersion);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+
+
+    /*
+    *    This function is for demo purposes
+    *    It populates the database with some events to get the user started
+    */
+    public void initialiseDatabase() {
+
+        // create some new events using the custom event class (Event.java)
+        // One of the constructors accepts the name, description, address and website link of an event
+        addEvent( new Event("Annual GSA Boston Harbor Cruise", "Details and tickets to follow soon.",
+                                "60 Rowes Whrf, Boston, Massachusetts 02110", "https://www.facebook.com/events/238965596572122/") );
+        addEvent( new Event("Red Sox vs Tampa Bay Rays", "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
+                                "Fenway Park, 4 Yawkey Way, Boston, Massachusetts 02215", "https://www.facebook.com/events/271118446666257/") );
+        addEvent( new Event("Celebrating Harry Bentley's Birthday", "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
+                                "Bentley University", "https://www.facebook.com/events/1016727698433556/") );
+        addEvent( new Event("The Week of World Food", "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
+                                "McCallum Graduate School Bentley University, 175 Forest St, Waltham", "https://www.facebook.com/events/2079322972294483/") );
+    }
+
+
+    /*
+    *    addEvent method accepts an event class instance and
+    *    inserts it into the database
+    */
+    public void addEvent(Event event){
+        try
+        {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            values = new ContentValues();
+            values.put(KEY_NAME, event.getEventName() );
+            values.put(KEY_DESC, event.getEventDescription() );
+            values.put(KEY_ADDRESS, event.getAddress() );
+            values.put(KEY_LINK, event.getWebsiteLink() );
+
+            db.insert(TABLE_NAME, null, values);
+            db.close();
+        }
+        catch (SQLException e)
+        {
+            Log.d("ADD EVENT ERROR: ", e.getMessage() );
+        }
+    }
+
+
+
+    public int getRecordCount(){
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String QUERY_COUNT_ROWS = "SELECT count(*) FROM " + TABLE_NAME;
+
+            cursor = db.rawQuery(QUERY_COUNT_ROWS, null);
+            cursor.moveToFirst();
+            int rowCount = cursor.getInt(0);
+
+
+            Log.d("ROW COUNT: ", Integer.toString(rowCount));
+            db.close();
+
+
+        return rowCount;
+
+
+
+    }
+
+
+    public void getAllEvents() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // query(String table, String[] columns, String whereClause, String[] whereArgs, String groupBy, String having, String orderBy)
+        cursor = db.rawQuery("select * from " + TABLE_NAME, null);;
+
+        //write contents of Cursor to list
+        Events = new ArrayList<Event>();
+
+            while ( cursor.moveToNext() )
+            {
+                int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
+                String addr = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
+                String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
+
+
+
+                Events.add(new Event(id, name, desc, addr, link));
+
+                Log.d("EVENT: ", Events.get(id - 1).toString() );
+            }
+            db.close();
+
+
+
+            // return Events;
+
+
+    }
+
+
+}
