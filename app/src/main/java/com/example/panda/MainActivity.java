@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        TabHost host = (TabHost) findViewById(R.id.tabhost);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("Current Events Tab");
+        spec.setContent(R.id.tabCurrentEvents);
+        spec.setIndicator("Current Events");
+        host.addTab(spec);
+
 
         dbHandler = new DBHandler(this);
 
-        //create database
+
+        //Create the events database
         try
         {
             db = dbHandler.getWritableDatabase();
