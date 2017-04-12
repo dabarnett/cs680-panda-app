@@ -133,7 +133,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void getAllEvents() {
+    public ArrayList<Event> getAllEvents() {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -161,8 +161,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
 
-            // return Events;
-
+        return Events;
 
     }
 

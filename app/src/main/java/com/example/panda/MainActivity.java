@@ -2,26 +2,17 @@ package com.example.panda;
 
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private DBHandler dbHandler;
     private SQLiteDatabase db;
     private ArrayList<Event> eventList;
+    private EventAdapter adapter;
+    private ListView eventListView;
 
 
 
@@ -43,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         TabHost host = (TabHost) findViewById(R.id.tabhost);
         host.setup();
 
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Current Events Tab");
+        //Events Tab
+        TabHost.TabSpec spec = host.newTabSpec("tabCurrentEvents");
         spec.setContent(R.id.tabCurrentEvents);
         spec.setIndicator("Current Events");
         host.addTab(spec);
@@ -73,16 +66,25 @@ public class MainActivity extends AppCompatActivity {
                 dbHandler.initialiseDatabase();
                 dbHandler.getAllEvents();
             }
-            else
-            {
+
                 Log.d("DEBUG:", "NOT NEEDED");
-                dbHandler.getAllEvents();
-            }
+                eventList = dbHandler.getAllEvents();
+
+                eventListView = (ListView)findViewById(R.id.eventListView);
+                adapter = new EventAdapter(this, R.layout.event_list_item, eventList);
+                eventListView.setAdapter(adapter);
+
         }
         catch (Exception e)
         {
             Log.d("ERROR LOG: ", e.getMessage() );
         }
+
+    }
+
+
+    public void loadEventsList()
+    {
 
     }
 
