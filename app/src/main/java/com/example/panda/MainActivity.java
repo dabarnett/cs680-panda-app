@@ -42,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator("Current Events");
         host.addTab(spec);
 
+        //Events Tab
+        spec = host.newTabSpec("tabMarketplace");
+        spec.setContent(R.id.tabMarketplace);
+        spec.setIndicator("Marketplace");
+        host.addTab(spec);
+
 
         dbHandler = new DBHandler(this);
 
