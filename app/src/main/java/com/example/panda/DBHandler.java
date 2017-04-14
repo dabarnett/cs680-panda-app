@@ -15,7 +15,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database properties
     private static final String DATABASE_NAME = "pandaDB";
     private static final String TABLE_NAME = "Events";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private Cursor cursor;
     private ContentValues values;
@@ -24,7 +24,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESC = "description";
-    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_ADDRESS = "street_address";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_STATE = "state";
     public static final String KEY_LINK = "website_link";
     // public static final String KEY_DATE_START = "date_start";
     // public static final String KEY_DATE_END = "date_end";
@@ -34,6 +36,8 @@ public class DBHandler extends SQLiteOpenHelper {
                                                 + KEY_NAME + " TEXT, "
                                                 + KEY_DESC + " TEXT, "
                                                 + KEY_ADDRESS + " TEXT, "
+                                                + KEY_CITY + " TEXT, "
+                                                + KEY_STATE + " TEXT, "
                                                 + KEY_LINK + " TEXT"
                                                 + ");";
 
@@ -73,15 +77,31 @@ public class DBHandler extends SQLiteOpenHelper {
     public void initialiseDatabase() {
 
         // create some new events using the custom event class (Event.java)
-        // One of the constructors accepts the name, description, address and website link of an event
-        addEvent( new Event("Annual GSA Boston Harbor Cruise", "Details and tickets to follow soon.",
-                                "60 Rowes Whrf, Boston, Massachusetts 02110", "https://www.facebook.com/events/238965596572122/") );
-        addEvent( new Event("Red Sox vs Tampa Bay Rays", "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
-                                "Fenway Park, 4 Yawkey Way, Boston, Massachusetts 02215", "https://www.facebook.com/events/271118446666257/") );
-        addEvent( new Event("Celebrating Harry Bentley's Birthday", "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
-                                "Bentley University", "https://www.facebook.com/events/1016727698433556/") );
-        addEvent( new Event("The Week of World Food", "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
-                                "McCallum Graduate School Bentley University, 175 Forest St, Waltham", "https://www.facebook.com/events/2079322972294483/") );
+        // One of the constructors accepts the name, description, address (street address, city, state) and website link of an event
+        addEvent( new Event("Annual GSA Boston Harbor Cruise",
+                                "Details and tickets to follow soon.",
+                                "60 Rowes Whrf",
+                                "Boston",
+                                "Massachusetts",
+                                "https://www.facebook.com/events/238965596572122/") );
+        addEvent( new Event("Red Sox vs Tampa Bay Rays",
+                                "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
+                                "Fenway Park 4 Yawkey Way",
+                                "Boston",
+                                "Massachusetts",
+                                "https://www.facebook.com/events/271118446666257/") );
+        addEvent( new Event("Celebrating Harry Bentley's Birthday",
+                                "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
+                                "Bentley University, 175 Forest Street",
+                                "Waltham",
+                                "Massachusetts",
+                                "https://www.facebook.com/events/1016727698433556/") );
+        addEvent( new Event("The Week of World Food",
+                                "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
+                                "Bentley University, 175 Forest St",
+                                "Waltham",
+                                "Massachusetts",
+                                "https://www.facebook.com/events/2079322972294483/") );
     }
 
 
@@ -97,7 +117,9 @@ public class DBHandler extends SQLiteOpenHelper {
             values = new ContentValues();
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
-            values.put(KEY_ADDRESS, event.getAddress() );
+            values.put(KEY_ADDRESS, event.getStreetAddress() );
+            values.put(KEY_CITY, event.getCity() );
+            values.put(KEY_STATE, event.getState() );
             values.put(KEY_LINK, event.getWebsiteLink() );
 
             db.insert(TABLE_NAME, null, values);
@@ -149,11 +171,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
                 String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
                 String addr = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
+                String city = cursor.getString(cursor.getColumnIndex(KEY_CITY));
+                String state = cursor.getString(cursor.getColumnIndex(KEY_STATE));
                 String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
 
 
 
-                Events.add(new Event(id, name, desc, addr, link));
+                Events.add(new Event(id, name, desc, addr, city, state, link));
 
                 Log.d("EVENT: ", Events.get(id - 1).toString() );
             }

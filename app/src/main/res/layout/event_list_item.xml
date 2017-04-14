@@ -4,31 +4,94 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:background="#fff">
 
 
-    <TextView
-        android:id="@+id/eventTitle"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:ellipsize="marquee"
-        android:lines="1"
-        android:text="Event Title"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:padding="15dp" >
 
-    <TextView
-        android:id="@+id/eventAddress"
-        android:layout_width="fill_parent"
+        <ImageView
+            android:id="@+id/bgEvent"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"/>
+
+
+        <TextView
+            android:id="@+id/eventTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:lines="1"
+            android:text="Event Title"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:ellipsize="marquee"
-        android:lines="1"
-        android:text="Event Address"
-        android:textSize="18sp"/>
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp">
+
+        <TextView
+            android:id="@+id/eventStreetAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="Event Address"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+
+        <TextView
+            android:id="@+id/eventCityState"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="City and State"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnShowLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="View Location"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:background="#fff">
+        </Button>
+
+        <Button
+            android:id="@+id/btnWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Event Website"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:background="#fff">
+        </Button>
+
+    </LinearLayout>
 
 
 </LinearLayout>

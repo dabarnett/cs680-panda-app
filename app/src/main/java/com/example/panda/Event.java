@@ -1,7 +1,6 @@
 package com.example.panda;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by DTech on 05/04/2017.
@@ -14,26 +13,32 @@ public class Event {
     private String eventDescription;
     private SimpleDateFormat startDateTime;
     private SimpleDateFormat endDateTime;
-    private String address;
+    private String streetAddress;
+    private String city;
+    private String state;
     private String websiteLink;
 
 
-    public Event( int id, String eventName, String eventDescription, String address, String websiteLink ){
+    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.address = address;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
         this.websiteLink = websiteLink;
     }
 
-    public Event( String eventName, String eventDescription, String address, String websiteLink ){
+    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.address = address;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
         this.websiteLink = websiteLink;
     }
 
@@ -49,8 +54,16 @@ public class Event {
         return eventDescription;
     }
 
-    public String getAddress(){
-        return address;
+    public String getStreetAddress(){
+        return streetAddress;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
+    public String getState(){
+        return state;
     }
 
     public String getWebsiteLink(){
@@ -59,7 +72,7 @@ public class Event {
 
 
     public String toString(){
-        return "id: " + id + ", eventName: " + eventName + ", address: " + address + ", websiteLink: " + websiteLink;
+        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink;
     }
 
 
