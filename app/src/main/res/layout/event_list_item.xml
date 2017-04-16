@@ -16,8 +16,8 @@
             android:id="@+id/bgEvent"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:scaleType="fitXY"/>
 
 
@@ -26,9 +26,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:lines="1"
             android:text="Event Title"
             android:textSize="25sp"
@@ -42,7 +43,8 @@
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="25dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp">
 
         <TextView
             android:id="@+id/eventStreetAddress"
@@ -77,6 +79,7 @@
             android:text="View Location"
             android:padding="5dp"
             android:textStyle="bold"
+            android:onClick="openMap"
             android:background="#fff">
         </Button>
 
@@ -88,6 +91,7 @@
             android:text="Event Website"
             android:padding="5dp"
             android:textStyle="bold"
+            android:onClick="openWeb"
             android:background="#fff">
         </Button>
 

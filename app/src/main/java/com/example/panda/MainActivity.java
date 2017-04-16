@@ -1,7 +1,12 @@
 package com.example.panda;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,12 +14,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -115,6 +123,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Handles the View Location Button,
+    //and sends user to MapsActivity using explicit intent
+    public void openMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    //Handles the Event Website Button,
+    //and sends the user to WebLookup activity using explicit intent
+    public void openWeb(View view){
+        Intent intent = new Intent(this, WebLookup.class);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(this, "WebLookup does not work!", Toast.LENGTH_LONG)
+                    .show();
+        }
+        else {
+            startActivity(intent);
+
+        }
+
     }
 
 }
