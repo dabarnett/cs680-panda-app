@@ -1,6 +1,7 @@
 package com.example.panda;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,14 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
     private ArrayList<Event> events;
     private int lastPosition = -1;
+    private Typeface tf;
+
 
 
     public EventAdapter(Context context, int resource, ArrayList<Event> data) {
         super(context, resource, data);
         this.events = data;
+        this.tf = Typeface.createFromAsset(context.getAssets(), "fonts/Muli-SemiBold.ttf");
     }
 
 
@@ -42,6 +46,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         lastPosition = position;
         TextView tvEventTtle = (TextView) convertView.findViewById(R.id.eventTitle);
         tvEventTtle.setText( event.getEventName() );
+        tvEventTtle.setTypeface(tf);
 
         TextView tvEventStreetAddress = (TextView) convertView.findViewById(R.id.eventStreetAddress);
         tvEventStreetAddress.setText( event.getStreetAddress() );
