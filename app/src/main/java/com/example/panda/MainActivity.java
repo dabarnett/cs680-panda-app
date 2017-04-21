@@ -125,16 +125,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Handles the View Location Button,
-    //and sends user to MapsActivity using explicit intent
-    public void openMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
-
     //Handles the Event Website Button,
     //and sends the user to WebLookup activity using explicit intent
     public void openWeb(View view){
