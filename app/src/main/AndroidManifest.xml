@@ -40,6 +40,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".CreateEvent"
+            android:label="Create Event"/>
+        <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
         <activity
