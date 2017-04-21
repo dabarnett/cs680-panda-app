@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/bgEvent"
-            android:layout_width="fill_parent"
-            android:layout_height="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:scaleType="fitXY"/>
@@ -35,12 +35,26 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#fff"/>
+
+
+        <TextView
+            android:id="@+id/eventCityState"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="170dp"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="City and State"
+            android:textSize="18sp"
+            android:textColor="#fff" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingStart="25dp"
@@ -48,22 +62,46 @@
 
         <TextView
             android:id="@+id/eventStreetAddress"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:lines="1"
+            android:layout_weight="2"
             android:text="Event Address"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/colorPrimaryDark" />
 
-
-        <TextView
-            android:id="@+id/eventCityState"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="City and State"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/eventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:layout_weight="2"
+                android:text="Mon, Feb 6"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/eventDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:layout_weight="2"
+                android:text="5 - 7pm"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -79,8 +117,8 @@
             android:text="View Location"
             android:padding="5dp"
             android:textStyle="bold"
-            android:onClick="eventButtonClick"
-            android:background="#fff">
+            android:background="#fff"
+            android:focusable="true">
         </Button>
 
         <Button
@@ -91,8 +129,8 @@
             android:text="Event Website"
             android:padding="5dp"
             android:textStyle="bold"
-            android:onClick="eventButtonClick"
-            android:background="#fff">
+            android:background="#fff"
+            android:focusable="true">
         </Button>
 
     </LinearLayout>

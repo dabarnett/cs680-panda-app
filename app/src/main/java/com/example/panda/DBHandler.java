@@ -15,7 +15,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database properties
     private static final String DATABASE_NAME = "pandaDB";
     private static final String TABLE_NAME = "Events";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private Cursor cursor;
     private ContentValues values;
@@ -80,27 +80,27 @@ public class DBHandler extends SQLiteOpenHelper {
         // One of the constructors accepts the name, description, address (street address, city, state) and website link of an event
         addEvent( new Event("Annual GSA Boston Harbor Cruise",
                                 "Details and tickets to follow soon.",
-                                "60 Rowes Whrf",
+                                "60 Rowes Wharf",
                                 "Boston",
-                                "Massachusetts",
+                                "MA",
                                 "https://www.facebook.com/events/238965596572122/") );
         addEvent( new Event("Red Sox vs Tampa Bay Rays",
                                 "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
                                 "Fenway Park 4 Yawkey Way",
                                 "Boston",
-                                "Massachusetts",
+                                "MA",
                                 "https://www.facebook.com/events/271118446666257/") );
         addEvent( new Event("Celebrating Harry Bentley's Birthday",
                                 "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
                                 "Bentley University, 175 Forest Street",
                                 "Waltham",
-                                "Massachusetts",
+                                "MA",
                                 "https://www.facebook.com/events/1016727698433556/") );
         addEvent( new Event("The Week of World Food",
                                 "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
                                 "Bentley University, 175 Forest St",
                                 "Waltham",
-                                "Massachusetts",
+                                "MA",
                                 "https://www.facebook.com/events/2079322972294483/") );
     }
 

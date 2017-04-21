@@ -3,12 +3,15 @@ package com.example.panda;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
 
     @Override
-    public View getView(int position, View row, ViewGroup parent) {
+    public View getView(final int position, View row, ViewGroup parent) {
 
         final Event event = getItem(position);
 
@@ -66,7 +69,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
 
         Button btnViewLocation = (Button) row.findViewById(R.id.btnShowLocation);
-        row.setOnClickListener(new View.OnClickListener() {
+        btnViewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openMap( event.getStreetAddress(), event.getCity(), event.getState() );
@@ -83,12 +86,15 @@ public class EventAdapter extends ArrayAdapter<Event> {
     //Handles the View Location Button,
     //and sends user to MapsActivity using explicit intent
     public void openMap(String streetAddress, String city, String state){
-        
-        Intent mapIntent = new Intent(context, MapsActivity.class);
-        mapIntent.putExtra("streetAddress", streetAddress);
-        mapIntent.putExtra("city", city);
-        mapIntent.putExtra("state", state);
-        context.startActivity(mapIntent);
+
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW,  Uri.parse("geo:0,0?q=" + Uri.encode(streetAddress + ", " + city) ));
+
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(mapIntent);
+        }
+
+
     }
 
 
