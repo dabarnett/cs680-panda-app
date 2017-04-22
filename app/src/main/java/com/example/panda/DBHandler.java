@@ -109,7 +109,9 @@ public class DBHandler extends SQLiteOpenHelper {
     *    addEvent method accepts an event class instance and
     *    inserts it into the database
     */
-    public void addEvent(Event event){
+    public boolean addEvent(Event event){
+        boolean success = false;
+
         try
         {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -122,13 +124,21 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_STATE, event.getState() );
             values.put(KEY_LINK, event.getWebsiteLink() );
 
-            db.insert(TABLE_NAME, null, values);
+            // insert function returns -1 if an error occurred OR ID no. of inserted record on success
+           if( db.insert(TABLE_NAME, null, values) != -1 )
+           {
+               success = true;
+           }
+
             db.close();
         }
         catch (SQLException e)
         {
             Log.d("ADD EVENT ERROR: ", e.getMessage() );
         }
+
+
+        return success;
     }
 
 

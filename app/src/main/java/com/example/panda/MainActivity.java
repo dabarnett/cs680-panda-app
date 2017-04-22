@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
 
-            // if the database is emoty then populate it with demo events
+            // if the database is empty then populate it with demo events
             if( dbHandler.getRecordCount() == 0 )
             {
                 dbHandler.initialiseDatabase();
@@ -124,11 +124,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_createEvent:
 
                 Log.d("MENU ACTION", "CREATE EVENT SELECTED");
-                /*
-                    menuIntent = new Intent(this, CreateEvent.class);
+                    Intent menuIntent = new Intent(this, CreateEvent.class);
                     startActivity(menuIntent);
-                */
-
             return true;
 
             default: super.onOptionsItemSelected(item);

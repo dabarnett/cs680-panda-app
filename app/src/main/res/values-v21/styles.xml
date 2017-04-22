@@ -2,14 +2,29 @@
 <resources>
 
     <style name="PaNDaTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/PaNDaActionBarTheme</item>
+        <item name="android:actionBarStyle">@style/PaNDaTheme.ActionBar</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+       <!-- <item name="android:tabWidgetStyle">@style/PaNDaTheme.LightTabWidget</item> -->
+
     </style>
 
-    <style name="PaNDaActionBarTheme" parent="Widget.AppCompat.ActionBar.Solid">
+    <style name="PaNDaTheme.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
         <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">#232323</item>
     </style>
+
+    <!--
+    <style name="PaNDaTheme.LightTabWidget" parent="@android:style/Widget.TabWidget">
+        <item name="android:textColor">#fff</item>
+        <item name="android:height">10dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_centerVertical">true</item>
+
+    </style>
+    -->
 
 </resources>

@@ -54,6 +54,14 @@
             android:hint="Event description"
             android:lines="2"/>
 
+        <Button
+            android:id="@+id/btnSaveEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4e4c4b"
+            android:textColor="#fff"
+            android:text="Save" />
+
 
     </LinearLayout>
 

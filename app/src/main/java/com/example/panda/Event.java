@@ -2,9 +2,6 @@ package com.example.panda;
 
 import java.text.SimpleDateFormat;
 
-/**
- * Created by DTech on 05/04/2017.
- */
 
 public class Event {
 

@@ -6,7 +6,7 @@
     <item
         android:id="@+id/action_createEvent"
         android:orderInCategory="100"
-        android:title="Create new Event"
+        android:title="Create new event"
         app:showAsAction="never" />
 
 </menu>
