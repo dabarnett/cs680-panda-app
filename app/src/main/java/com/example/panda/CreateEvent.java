@@ -73,8 +73,15 @@ public class CreateEvent extends Activity {
         AlertDialog dialog = new AlertDialog.Builder(CreateEvent.this).create();
 
         LayoutInflater factory = LayoutInflater.from(CreateEvent.this);
-        final View dialogView = factory.inflate(R.layout.dialog_image_container, null);
+        View dialogView = factory.inflate(R.layout.dialog_image_container, null);
         dialog.setView(dialogView);
+
+        ImageView imgAlert = (ImageView) findViewById(R.id.imgAlert);
+        imgAlert.setBackgroundResource(R.drawable.alert_animation);
+
+        final AnimationDrawable frameAnimation = (AnimationDrawable) imgAlert.getBackground();
+
+
 
         if(!success)
         {
@@ -106,14 +113,16 @@ public class CreateEvent extends Activity {
                     startActivity(intentEventList);
                 }
             });
-
-            ImageView imgAlert = (ImageView) findViewById(R.id.imgAlert);
-            imgAlert.setBackgroundResource(R.drawable.alert_animation);
-
-            AnimationDrawable frameAnimation = (AnimationDrawable) imgAlert.getBackground();
-            frameAnimation.start();
-
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    frameAnimation.start();
+                }
+            });
             dialog.show();
+
+
+            frameAnimation.start();
 
         }
 
