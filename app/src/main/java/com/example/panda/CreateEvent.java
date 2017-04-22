@@ -76,7 +76,7 @@ public class CreateEvent extends Activity {
         View dialogView = factory.inflate(R.layout.dialog_image_container, null);
         dialog.setView(dialogView);
 
-        ImageView imgAlert = (ImageView) findViewById(R.id.imgAlert);
+        ImageView imgAlert = (ImageView) dialogView.findViewById(R.id.imgAlert);
         imgAlert.setBackgroundResource(R.drawable.alert_animation);
 
         final AnimationDrawable frameAnimation = (AnimationDrawable) imgAlert.getBackground();
@@ -120,9 +120,6 @@ public class CreateEvent extends Activity {
                 }
             });
             dialog.show();
-
-
-            frameAnimation.start();
 
         }
 
