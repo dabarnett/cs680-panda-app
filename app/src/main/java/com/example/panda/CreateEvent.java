@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -69,6 +72,10 @@ public class CreateEvent extends Activity {
 
         AlertDialog dialog = new AlertDialog.Builder(CreateEvent.this).create();
 
+        LayoutInflater factory = LayoutInflater.from(CreateEvent.this);
+        final View dialogView = factory.inflate(R.layout.dialog_image_container, null);
+        dialog.setView(dialogView);
+
         if(!success)
         {
             // this will show up if there was an error adding the event to the database
@@ -99,6 +106,12 @@ public class CreateEvent extends Activity {
                     startActivity(intentEventList);
                 }
             });
+
+            ImageView imgAlert = (ImageView) findViewById(R.id.imgAlert);
+            imgAlert.setBackgroundResource(R.drawable.alert_animation);
+
+            AnimationDrawable frameAnimation = (AnimationDrawable) imgAlert.getBackground();
+            frameAnimation.start();
 
             dialog.show();
 
