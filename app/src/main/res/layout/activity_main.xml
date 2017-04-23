@@ -2,7 +2,8 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tabhost"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/TabWidgetTheme">
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                 <ListView
                     android:id="@+id/eventListView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></ListView>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <!-- second tab -->
