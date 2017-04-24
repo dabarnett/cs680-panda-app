@@ -9,4 +9,10 @@
         android:title="Create new event"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_sellItem"
+        android:orderInCategory="200"
+        android:title="Sell an item"
+        app:showAsAction="never" />
+
 </menu>

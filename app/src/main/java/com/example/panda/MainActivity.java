@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DBHandler dbHandler;
     private SQLiteDatabase db;
+    private SQLiteDatabase db2;
     private ArrayList<Event> eventList;
     private EventAdapter adapter;
     private ListView eventListView;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             db = dbHandler.getWritableDatabase();
+            db2 = dbHandler.getWritableDatabase();
         }
         catch(SQLException e)
         {
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d("ERROR LOG: ", e.getMessage() );
         }
+
 
     }
 
@@ -135,3 +138,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
+
