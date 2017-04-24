@@ -28,7 +28,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_CITY = "city";
     public static final String KEY_STATE = "state";
     public static final String KEY_LINK = "website_link";
-    public static final String KEY_NUMBER = "contact number";
+    public static final String KEY_NUMBER = "contact_number";
     // public static final String KEY_DATE_START = "date_start";
     // public static final String KEY_DATE_END = "date_end";
 
@@ -40,7 +40,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                                 + KEY_CITY + " TEXT, "
                                                 + KEY_STATE + " TEXT, "
                                                 + KEY_LINK + " TEXT, "
-                                                + KEY_NUMBER + "TEXT)" ;
+                                                + KEY_NUMBER + " TEXT)" ;
 
 
     private ArrayList<Event> Events;
@@ -122,7 +122,7 @@ public class DBHandler extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
 
             values = new ContentValues();
-            values.put(KEY_ID, event.getEventID() );
+            //values.put(KEY_ID, event.getEventID() );
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
             values.put(KEY_ADDRESS, event.getStreetAddress() );
