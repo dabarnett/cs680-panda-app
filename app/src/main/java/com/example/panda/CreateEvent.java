@@ -8,14 +8,28 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 
 /*
@@ -23,8 +37,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
    It will then call the add event function in the DB Handler class to add the event to the DB.
  */
 
-public class CreateEvent extends Activity {
+public class CreateEvent extends Activity implements PlaceSelectionListener {
 
+
+    private Context context;
 
     private String userEventTitle;
     private String userEventAddress;
@@ -33,11 +49,17 @@ public class CreateEvent extends Activity {
     private String userEventDescription;
     private String userEventWebsite;
     private String userContactNumber;
-
-    private Context context;
-
-
     private DBHandler dbHandler;
+
+    private GoogleApiClient mGoogleApiClient;
+    // this will be used to bias, but not limit, the search results in the place API to the US
+    private static final LatLngBounds BOUNDS_USA = new LatLngBounds( new LatLng(-125.0011, 24.9493), new LatLng(-66.9326, 49.5904) );
+
+
+    private EditText txtAddress;
+    private EditText txtCity;
+    private EditText txtState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +75,82 @@ public class CreateEvent extends Activity {
 
         this.context = this;
 
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .build();
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setOnPlaceSelectedListener(this);
+        autocompleteFragment.setHint("Pick an event location");
+
+
+        txtAddress = (EditText) findViewById(R.id.txtAddress);
+        txtCity = (EditText) findViewById(R.id.txtEventCity);
+        txtState = (EditText) findViewById(R.id.txtEventState);
+
+
+        // if an address provided by the API is erased from the address field
+        // then enable the city and state edit texts for manual entry
+        txtAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Before user enters the text
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //On user changes the text
+                if(s.toString().trim().length()==0) {
+                   txtCity.setEnabled(true);
+                   txtState.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //After user is done entering the text
+
+            }
+        });
+
     }
+
+    // this method is called when a suggestion from the placeautocomplete fragment
+    // supplied by the API is selected.
+    @Override
+    public void onPlaceSelected(Place place) {
+        Log.i("PLACE LISTENER DEBUG", "Place Selected: " + place.getName());
+
+
+        txtAddress.setText( place.getName() + ", " + place.getAddress() );
+        txtCity.setEnabled(false);
+        txtState.setEnabled(false);
+
+    }
+
+    @Override
+    public void onError(Status status) {
+        Log.e("PLACE LISTENER DEBUG", "onError: Status = " + status.toString());
+        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
 
     public void createEvent(View view){
 
