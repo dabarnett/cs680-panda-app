@@ -134,21 +134,4 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    //Handles the Event Website Button,
-    //and sends the user to WebLookup activity using explicit intent
-    public void openWeb(View view){
-        Intent intent = new Intent(this, WebLookup.class);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
-                != PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(this, "WebLookup does not work!", Toast.LENGTH_LONG)
-                    .show();
-        }
-        else {
-            startActivity(intent);
-
-        }
-
-    }
-
 }

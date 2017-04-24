@@ -1,6 +1,7 @@
 package com.example.panda;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -8,22 +9,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-/**
- * Created by nataliehaugenhusby on 16/04/2017.
- */
-
 public class WebLookup extends AppCompatActivity {
 
     private WebView webView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_lookup);
 
+        String Url = getIntent().getExtras().getString("Url");
+        Toast.makeText(this, Url, Toast.LENGTH_LONG)
+                .show();
+
         webView = (WebView) findViewById(R.id.webView);
         //webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://www.bentley.edu");
+        webView.loadUrl(Url);
 
         //intercept URL loading and load in widget
         webView.setWebViewClient(new WebViewClient(){

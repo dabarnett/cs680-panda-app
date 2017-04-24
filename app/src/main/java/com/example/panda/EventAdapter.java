@@ -2,8 +2,11 @@ package com.example.panda;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,6 +80,14 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         });
 
+        Button btnViewWebsite = (Button) row.findViewById(R.id.btnWebsite);
+        btnViewWebsite.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+               openWeb(event.getWebsiteLink());
+            }
+        });
+
 
 
         return row;
@@ -97,6 +109,23 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
     }
 
+    //Handles the Event Website Button,
+    //and sends the user to WebLookup activity using explicit intent
+    public void openWeb(String webAddress){
+        Intent intent = new Intent(context, WebLookup.class);
+        intent.putExtra("Url", webAddress);
 
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(context, "WebLookup does not work!", Toast.LENGTH_LONG)
+                    .show();
+        }
+        else {
+            context.startActivity(intent);
+
+        }
+
+    }
 
 }
