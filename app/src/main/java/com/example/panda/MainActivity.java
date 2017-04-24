@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 eventListView.setAdapter(adapter);
 
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
             Log.d("ERROR LOG: ", e.getMessage() );
         }

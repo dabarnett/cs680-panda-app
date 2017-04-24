@@ -15,7 +15,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database properties
     private static final String DATABASE_NAME = "pandaDB";
     private static final String TABLE_NAME = "Events";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private Cursor cursor;
     private ContentValues values;
@@ -122,7 +122,7 @@ public class DBHandler extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
 
             values = new ContentValues();
-            //values.put(KEY_ID, event.getEventID() );
+            // values.put(KEY_ID, event.getEventID() );
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
             values.put(KEY_ADDRESS, event.getStreetAddress() );
@@ -174,16 +174,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public ArrayList<Event> getAllEvents() {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
 
-        // query(String table, String[] columns, String whereClause, String[] whereArgs, String groupBy, String having, String orderBy)
-        cursor = db.rawQuery("select * from " + TABLE_NAME, null);;
+            // query(String table, String[] columns, String whereClause, String[] whereArgs, String groupBy, String having, String orderBy)
+            cursor = db.rawQuery("select * from " + TABLE_NAME, null);
 
-        //write contents of Cursor to list
-        Events = new ArrayList<Event>();
+            //write contents of Cursor to list
+            Events = new ArrayList<Event>();
 
-            while ( cursor.moveToNext() )
-            {
+            while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
                 String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
@@ -194,12 +194,15 @@ public class DBHandler extends SQLiteOpenHelper {
                 String nmber = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
 
 
-
                 Events.add(new Event(id, name, desc, addr, city, state, link, nmber));
 
-                Log.d("EVENT: ", Events.get(id - 1).toString() );
+                Log.d("EVENT: ", Events.get(id - 1).toString());
             }
             db.close();
+        }
+        catch (SQLException e){
+            Log.d("DB HANDLER DEBUG", e.getMessage());
+        }
 
 
 
