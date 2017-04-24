@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="15dp">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +57,23 @@
             android:lines="2"/>
 
         <EditText
+            android:id="@+id/txtStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Start Time"
+            android:lines="2"/>
+
+        <EditText
+            android:id="@+id/txtEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="End Time"
+            android:lines="2"/>
+
+
+        <EditText
             android:id="@+id/contactNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,5 +91,5 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 </RelativeLayout>
