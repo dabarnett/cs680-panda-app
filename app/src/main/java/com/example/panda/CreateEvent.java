@@ -2,9 +2,6 @@ package com.example.panda;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,8 +32,7 @@ public class CreateEvent extends Activity {
     private String userEventState;
     private String userEventDescription;
     private String userEventWebsite;
-    private Intent notifyIntent;
-    private String message;
+    private String userContactNumber;
 
     private Context context;
 
@@ -56,7 +52,6 @@ public class CreateEvent extends Activity {
         });
 
         this.context = this;
-        notifyIntent = new Intent(this, MainActivity.class);
 
     }
 
@@ -69,7 +64,8 @@ public class CreateEvent extends Activity {
         userEventState = ( (EditText) findViewById(R.id.txtEventState) ).getText().toString();
         userEventDescription = ( (EditText) findViewById(R.id.txtDescription) ).getText().toString();
         userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
-        Event userEvent = new Event(userEventTitle, userEventDescription, userEventAddress, userEventCity, userEventState, userEventWebsite);
+        userContactNumber = ( (EditText) findViewById(R.id.contactNumber) ).getText().toString();
+        Event userEvent = new Event(userEventTitle, userEventDescription, userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber);
 
 
         // pass event object to the db handler class
@@ -111,10 +107,6 @@ public class CreateEvent extends Activity {
             dialog.setTitle("Congrats!");
             dialog.setMessage("Your event was created");
 
-            message = "A new event named " + userEventTitle + " have been created.";
-
-            showNotification(context);
-
             dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",	new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
@@ -133,26 +125,6 @@ public class CreateEvent extends Activity {
 
         }
 
-    }
-    //Sets and composes the notification
-    public void showNotification(Context context){
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_ONE_SHOT);
-
-        Notification magicNotification = new Notification.Builder(context)
-                .setContentTitle("New event created")    //set Notification text and icon
-                .setContentText(message)
-                .setSmallIcon(R.drawable.panda)
-                .setTicker("New event created!")
-                .setWhen(System.currentTimeMillis())
-                .setContentIntent(pendingIntent)
-                .setVibrate(new long[] {1000, 1000, 1000, 1000})
-                .setLights(Integer.MAX_VALUE,  500,  500)
-                .setAutoCancel(true)                                // auto close notification on click
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, magicNotification);
     }
 
 }
