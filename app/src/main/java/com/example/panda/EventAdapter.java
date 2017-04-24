@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ActivityChooserView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,6 +89,15 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         });
 
+        Button btnContact = (Button) row.findViewById(R.id.btnContact);
+
+        btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialer(event.getContactNumber());
+            }
+
+        });
 
 
         return row;
@@ -127,5 +137,11 @@ public class EventAdapter extends ArrayAdapter<Event> {
         }
 
     }
+
+    public void openDialer(String contactNumber){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+               intent.setData(Uri.parse("tel:" + contactNumber));
+               context.startActivity(intent);
+        }
 
 }
