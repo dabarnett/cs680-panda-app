@@ -32,6 +32,7 @@ public class CreateEvent extends Activity {
     private String userEventState;
     private String userEventDescription;
     private String userEventWebsite;
+    private String userContactNumber;
 
     private Context context;
 
@@ -63,7 +64,8 @@ public class CreateEvent extends Activity {
         userEventState = ( (EditText) findViewById(R.id.txtEventState) ).getText().toString();
         userEventDescription = ( (EditText) findViewById(R.id.txtDescription) ).getText().toString();
         userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
-        Event userEvent = new Event(userEventTitle, userEventDescription, userEventAddress, userEventCity, userEventState, userEventWebsite);
+        userContactNumber = ( (EditText) findViewById(R.id.contactNumber) ).getText().toString();
+        Event userEvent = new Event(userEventTitle, userEventDescription, userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber);
 
 
         // pass event object to the db handler class

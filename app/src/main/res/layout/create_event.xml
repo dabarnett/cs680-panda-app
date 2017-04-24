@@ -54,6 +54,14 @@
             android:hint="Event description"
             android:lines="2"/>
 
+        <EditText
+            android:id="@+id/contactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Contact number"
+            android:lines="2" />
+
         <Button
             android:id="@+id/btnSaveEvent"
             android:layout_width="match_parent"

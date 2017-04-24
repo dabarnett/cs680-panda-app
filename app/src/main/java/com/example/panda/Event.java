@@ -14,9 +14,10 @@ public class Event {
     private String city;
     private String state;
     private String websiteLink;
+    private String contactNumber;
 
 
-    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink ){
+    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -26,9 +27,10 @@ public class Event {
         this.city = city;
         this.state = state;
         this.websiteLink = websiteLink;
+        this.contactNumber = contactNumber;
     }
 
-    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink ){
+    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -37,6 +39,7 @@ public class Event {
         this.city = city;
         this.state = state;
         this.websiteLink = websiteLink;
+        this.contactNumber = contactNumber;
     }
 
     public int getEventID(){
@@ -67,9 +70,11 @@ public class Event {
         return websiteLink;
     }
 
+    public String getContactNumber() {return contactNumber; }
+
 
     public String toString(){
-        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink;
+        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber;
     }
 
 
