@@ -133,6 +133,14 @@
             android:focusable="true">
         </Button>
 
+        <ToggleButton
+            android:id="@+id/btnStarred"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/toggleButton"
+            android:background="@drawable/ic_toggle_bg"/>
+
     </LinearLayout>
 
 
