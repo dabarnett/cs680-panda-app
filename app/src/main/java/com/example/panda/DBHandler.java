@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -29,13 +30,16 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_STATE = "state";
     public static final String KEY_LINK = "website_link";
     public static final String KEY_NUMBER = "contact_number";
-    // public static final String KEY_DATE_START = "date_start";
-    // public static final String KEY_DATE_END = "date_end";
+    public static final String KEY_START = "start_time";
+    public static final String KEY_END = "end_time";
+
 
     public static final String QUERY_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
                                                 + KEY_ID + " INTEGER primary key autoincrement,"
                                                 + KEY_NAME + " TEXT, "
                                                 + KEY_DESC + " TEXT, "
+                                                + KEY_START + " TEXT, "
+                                                + KEY_END + " TEXT, "
                                                 + KEY_ADDRESS + " TEXT, "
                                                 + KEY_CITY + " TEXT, "
                                                 + KEY_STATE + " TEXT, "
@@ -81,6 +85,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // One of the constructors accepts the name, description, address (street address, city, state) and website link of an event
         addEvent( new Event( "Annual GSA Boston Harbor Cruise",
                                 "Details and tickets to follow soon.",
+                                "1PM",
+                                "10PM",
                                 "60 Rowes Wharf",
                                 "Boston",
                                 "MA",
@@ -88,6 +94,8 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "781-555-2113") );
         addEvent( new Event( "Red Sox vs Tampa Bay Rays",
                                 "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
+                                "6PM",
+                                "9PM",
                                 "Fenway Park 4 Yawkey Way",
                                 "Boston",
                                 "MA",
@@ -95,6 +103,8 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "781-555-2116") );
         addEvent( new Event( "Celebrating Harry Bentley's Birthday",
                                 "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
+                                "3PM",
+                                "8PM",
                                 "Bentley University, 175 Forest Street",
                                 "Waltham",
                                 "MA",
@@ -102,6 +112,8 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "781-555-2115") );
         addEvent( new Event( "The Week of World Food",
                                 "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
+                                "2PM",
+                                "5PM",
                                 "Bentley University, 175 Forest St",
                                 "Waltham",
                                 "MA",
@@ -125,6 +137,8 @@ public class DBHandler extends SQLiteOpenHelper {
             // values.put(KEY_ID, event.getEventID() );
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
+            values.put(KEY_START, event.getStartDateTime() );
+            values.put(KEY_END, event.getEndDateTime() );
             values.put(KEY_ADDRESS, event.getStreetAddress() );
             values.put(KEY_CITY, event.getCity() );
             values.put(KEY_STATE, event.getState() );
@@ -187,6 +201,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
                 String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
+                String start = cursor.getString(cursor.getColumnIndex(KEY_START));
+                String end = cursor.getString(cursor.getColumnIndex(KEY_END));
                 String addr = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
                 String city = cursor.getString(cursor.getColumnIndex(KEY_CITY));
                 String state = cursor.getString(cursor.getColumnIndex(KEY_STATE));
@@ -194,7 +210,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 String nmber = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
 
 
-                Events.add(new Event(id, name, desc, addr, city, state, link, nmber));
+
+                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber));
 
                 Log.d("EVENT: ", Events.get(id - 1).toString());
             }

@@ -49,6 +49,10 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     private String userEventDescription;
     private String userEventWebsite;
     private String userContactNumber;
+    private String userEventStartTime;
+    private String userEventEndTime;
+
+
     private DBHandler dbHandler;
 
     private GoogleApiClient mGoogleApiClient;
@@ -160,9 +164,11 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         userEventCity = ( (EditText) findViewById(R.id.txtEventCity) ).getText().toString();
         userEventState = ( (EditText) findViewById(R.id.txtEventState) ).getText().toString();
         userEventDescription = ( (EditText) findViewById(R.id.txtDescription) ).getText().toString();
+        userEventStartTime = ( (EditText) findViewById(R.id.txtStartTime) ).getText().toString();
+        userEventEndTime = ( (EditText) findViewById(R.id.txtEndTime) ).getText().toString();
         userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
         userContactNumber = ( (EditText) findViewById(R.id.contactNumber) ).getText().toString();
-        Event userEvent = new Event(userEventTitle, userEventDescription, userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber);
+        Event userEvent = new Event(userEventTitle, userEventDescription, userEventStartTime, userEventEndTime, userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber);
 
 
         // pass event object to the db handler class

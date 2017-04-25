@@ -8,8 +8,8 @@ public class Event {
     private int id;
     private String eventName;
     private String eventDescription;
-    private SimpleDateFormat startDateTime;
-    private SimpleDateFormat endDateTime;
+    private String startDateTime;
+    private String endDateTime;
     private String streetAddress;
     private String city;
     private String state;
@@ -17,7 +17,7 @@ public class Event {
     private String contactNumber;
 
 
-    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
+    public Event(int id, String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -30,7 +30,7 @@ public class Event {
         this.contactNumber = contactNumber;
     }
 
-    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
+    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -72,10 +72,15 @@ public class Event {
 
     public String getContactNumber() {return contactNumber; }
 
+    public String getStartDateTime() {return startDateTime; }
+
+    public String getEndDateTime() {return endDateTime; }
+
 
     public String toString(){
-        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber;
+        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", startDateTime" + startDateTime + ", endDateTime" + endDateTime;
     }
+
 
 
 }
