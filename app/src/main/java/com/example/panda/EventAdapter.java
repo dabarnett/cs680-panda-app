@@ -1,5 +1,6 @@
 package com.example.panda;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -82,7 +85,33 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         });
 
+        ToggleButton toggle = (ToggleButton) row.findViewById(R.id.btnStarred);
+        String starred = event.getStarredStatus();
+        if (starred.equals("No")) {
+            toggle.setChecked(false);
+        }
+        else if(starred.equals("Yes")) {
+            toggle.setChecked(true);
+        }
+        else {
+            Toast.makeText(context, "There is a problem here! Starred status is " + event.getStarredStatus(), Toast.LENGTH_LONG)
+                    .show();
+        }
 
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+
+                    Toast.makeText(context, "The event has been starred!", Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    // The toggle is disabled
+                    Toast.makeText(context, "You've unstarred the event!", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
 
         return row;
 
