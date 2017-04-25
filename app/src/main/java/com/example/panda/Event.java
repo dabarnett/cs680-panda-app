@@ -18,8 +18,7 @@ public class Event {
     private String starred;
 
 
-    public Event(int id, String eventName, String eventDescription, String streetAddress,
-                 String city, String state, String websiteLink, String contactNumber, String starred ){
+    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -33,8 +32,7 @@ public class Event {
         this.starred = starred;
     }
 
-    public Event(String eventName, String eventDescription, String streetAddress, String city,
-                 String state, String websiteLink, String contactNumber, String starred ){
+    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
