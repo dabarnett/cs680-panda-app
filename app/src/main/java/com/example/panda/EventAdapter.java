@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -79,6 +80,14 @@ public class EventAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View view) {
                openWeb(event.getWebsiteLink());
+            }
+        });
+
+        ToggleButton btnStarred = (ToggleButton) row.findViewById(R.id.btnStarred);
+        btnStarred.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
