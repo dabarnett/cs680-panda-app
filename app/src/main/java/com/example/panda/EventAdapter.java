@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
     private ArrayList<Event> events;
     private int lastPosition = -1;
     private Typeface tf;
+    private DBHandler dbHandler;
 
 
     public EventAdapter(Context context, int resource, ArrayList<Event> data) {
@@ -84,12 +86,21 @@ public class EventAdapter extends ArrayAdapter<Event> {
         });
 
         final ToggleButton btnStarred = (ToggleButton) row.findViewById(R.id.btnStarred);
+        if(event.getStarredStatus() == "Yes")
+            btnStarred.setChecked(true);
+
         btnStarred.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if( btnStarred.isChecked() ){
-
+                    event.setStarredStatus("Yes");
                 }
+                else{
+                    event.setStarredStatus("No");
+                }
+
+                dbHandler = new DBHandler(context);
+                dbHandler.updateStarredStatus( event.getEventID(), event.getStarredStatus() );
 
             }
         });

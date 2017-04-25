@@ -15,10 +15,11 @@ public class Event {
     private String state;
     private String websiteLink;
     private String contactNumber;
+    private String starred;
 
 
-
-    public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
+    public Event(int id, String eventName, String eventDescription, String streetAddress,
+                 String city, String state, String websiteLink, String contactNumber, String starred ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -29,9 +30,11 @@ public class Event {
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
+        this.starred = starred;
     }
 
-    public Event(String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
+    public Event(String eventName, String eventDescription, String streetAddress, String city,
+                 String state, String websiteLink, String contactNumber, String starred ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -41,6 +44,7 @@ public class Event {
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
+        this.starred = starred;
     }
 
     public int getEventID(){
@@ -73,9 +77,16 @@ public class Event {
 
     public String getContactNumber() {return contactNumber; }
 
+    public String getStarredStatus() {return starred; }
+
+    public void setStarredStatus(String starred){
+        this.starred = starred;
+    }
 
     public String toString(){
-        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber;
+        return "id: " + id + ", eventName: " + eventName + ", streetAddress: "
+                + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " +
+                contactNumber + ", starred: " + starred;
     }
 
 
