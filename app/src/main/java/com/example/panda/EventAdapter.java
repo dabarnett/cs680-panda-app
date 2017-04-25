@@ -83,10 +83,13 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         });
 
-        ToggleButton btnStarred = (ToggleButton) row.findViewById(R.id.btnStarred);
+        final ToggleButton btnStarred = (ToggleButton) row.findViewById(R.id.btnStarred);
         btnStarred.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if( btnStarred.isChecked() ){
+
+                }
 
             }
         });

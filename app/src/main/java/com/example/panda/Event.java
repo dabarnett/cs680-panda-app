@@ -17,6 +17,7 @@ public class Event {
     private String contactNumber;
 
 
+
     public Event(int id, String eventName, String eventDescription, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.id = id;
         this.eventName = eventName;
