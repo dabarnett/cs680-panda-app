@@ -147,26 +147,26 @@ public class DBHandler extends SQLiteOpenHelper {
                 "MA",
                 "781-555-2113") );
 
-        addItem( new Item( "Tape Drive",
-                "LTO 4 Tape Drive.",
+        addItem( new Item( "Proliant G4 Server",
+                "HP Proliant G4 Server",
                 "$400",
-                "Boston",
+                "Wilmington",
                 "MA",
-                "781-555-2113") );
+                "781-555-2115") );
 
-        addItem( new Item( "Tape Drive",
-                "LTO 4 Tape Drive.",
-                "$400",
-                "Boston",
+        addItem( new Item( "LTO 4 Tapes",
+                "LTO 4 Tapes",
+                "$100",
+                "Waltham",
                 "MA",
-                "781-555-2113") );
+                "781-555-2119") );
 
-        addItem( new Item( "Tape Drive",
-                "LTO 4 Tape Drive.",
-                "$400",
-                "Boston",
+        addItem( new Item( "Rockstar Punched",
+                "Best Energy Drink Ever",
+                "$4",
+                "Stoneham",
                 "MA",
-                "781-555-2113") );
+                "781-555-2112") );
     }
 
 
