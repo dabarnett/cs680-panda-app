@@ -89,7 +89,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnContact"
+            android:id="@+id/btnItemContact"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="Contact"

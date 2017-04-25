@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.view.View.*;
+
 
 // This adapter allows us to customise the event listview
 // We can specify the event data to be placed in the listview layout
@@ -70,15 +72,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         imgItem.setImageResource(R.drawable.event_harborcruise);
 
 
-        Button btnItemContact = (Button) row.findViewById(R.id.btnSellItem);
+        Button btnItemContact = (Button) row.findViewById(R.id.btnItemContact);
 
-            btnItemContact.setOnClickListener(new View.OnClickListener() {
+        btnItemContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialer(item.getItemContactNumber());
             }
-
-        });
+            });
 
 
         return row;
