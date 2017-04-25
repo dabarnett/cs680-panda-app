@@ -15,9 +15,14 @@ public class Event {
     private String state;
     private String websiteLink;
     private String contactNumber;
+    private String imagePath;
 
 
-    public Event(int id, String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
+
+
+
+
+    public Event(int id, String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String imagePath ){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -28,9 +33,11 @@ public class Event {
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
+        this.imagePath = imagePath;
     }
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber){
+
+    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -41,6 +48,21 @@ public class Event {
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
     }
+
+
+    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String imagePath){
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.websiteLink = websiteLink;
+        this.contactNumber = contactNumber;
+        this.imagePath = imagePath;
+    }
+
 
     public int getEventID(){
         return id;
@@ -76,9 +98,15 @@ public class Event {
 
     public String getEndDateTime() {return endDateTime; }
 
+    public String getImagePath() {return imagePath; }
 
+    public void setImagePath(String imagePath){
+        this.imagePath = imagePath;
+    }
+
+    // this function is mostly for testing purposes. It will print the value of each event object in a string.
     public String toString(){
-        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", startDateTime" + startDateTime + ", endDateTime" + endDateTime;
+        return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress + ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", startDateTime: " + startDateTime + ", endDateTime: " + endDateTime + ", imagePath: " + imagePath;
     }
 
 

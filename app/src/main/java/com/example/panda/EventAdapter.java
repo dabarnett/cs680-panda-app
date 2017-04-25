@@ -70,8 +70,14 @@ public class EventAdapter extends ArrayAdapter<Event> {
         tvEventCityState.setText( event.getCity() + ", " + event.getState() );
 
         ImageView imgEvent = (ImageView) row.findViewById(R.id.bgEvent);
-        imgEvent.setImageResource(R.drawable.event_harborcruise);
-
+        if( event.getImagePath() == null || event.getImagePath().isEmpty() )
+        {
+             event.setImagePath( "event_default_img" );
+        }
+            // the line below will find the id of the image resource with a matching name and then get set the resource
+            // with the matching id to the imageview
+            int resourceID = context.getResources().getIdentifier( event.getImagePath(), "drawable", context.getPackageName() );
+            imgEvent.setImageResource( resourceID );
 
         Button btnViewLocation = (Button) row.findViewById(R.id.btnShowLocation);
         btnViewLocation.setOnClickListener(new View.OnClickListener() {
