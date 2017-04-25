@@ -37,7 +37,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
    It will then call the add event function in the DB Handler class to add the event to the DB.
  */
 
-public class CreateEvent extends Activity {
+public class CreateEvent extends Activity implements PlaceSelectionListener {
 
 
     private Context context;
@@ -80,7 +80,82 @@ public class CreateEvent extends Activity {
 
         this.context = this;
 
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .build();
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setOnPlaceSelectedListener(this);
+        autocompleteFragment.setHint("Pick an event location");
+
+
+        txtAddress = (EditText) findViewById(R.id.txtAddress);
+        txtCity = (EditText) findViewById(R.id.txtEventCity);
+        txtState = (EditText) findViewById(R.id.txtEventState);
+
+
+        // if an address provided by the API is erased from the address field
+        // then enable the city and state edit texts for manual entry
+        txtAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Before user enters the text
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //On user changes the text
+                if(s.toString().trim().length()==0) {
+                   txtCity.setEnabled(true);
+                   txtState.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //After user is done entering the text
+
+            }
+        });
+
     }
+
+    // this method is called when a suggestion from the placeautocomplete fragment
+    // supplied by the API is selected.
+    @Override
+    public void onPlaceSelected(Place place) {
+        Log.i("PLACE LISTENER DEBUG", "Place Selected: " + place.getName());
+
+
+        txtAddress.setText( place.getName() + ", " + place.getAddress() );
+        txtCity.setEnabled(false);
+        txtState.setEnabled(false);
+
+    }
+
+    @Override
+    public void onError(Status status) {
+        Log.e("PLACE LISTENER DEBUG", "onError: Status = " + status.toString());
+        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
 
     public void createEvent(View view){
 

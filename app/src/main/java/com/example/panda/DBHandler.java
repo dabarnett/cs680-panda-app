@@ -24,7 +24,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private ContentValues itemvalues;
 
 
-    public static final String KEY_ID = "id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESC = "description";
     public static final String KEY_START = "start_time";
@@ -57,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                                 + KEY_STATE + " TEXT, "
                                                 + KEY_LINK + " TEXT, "
                                                 + KEY_NUMBER + " TEXT, "
-                                                + KEY_STARRED + " TEXT, ";
+                                                + KEY_STARRED + " TEXT, "
                                                 + IMG_PATH + " TEXT)";
 
     public static final String ITEM_QUERY_CREATE_TABLE = "CREATE TABLE " + ITEM_TABLE_NAME + " ("

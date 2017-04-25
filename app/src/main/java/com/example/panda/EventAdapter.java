@@ -136,8 +136,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 }
 
 
-
-
             }
         });
 

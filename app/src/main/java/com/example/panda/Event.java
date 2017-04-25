@@ -37,7 +37,7 @@ public class Event {
     }
 
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String starred, String contactNumber  ){
+    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred  ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -47,8 +47,7 @@ public class Event {
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
-        this.starred = starred;
-        this.imagePath = imagePath;
+        this.starred = starred;;
     }
 
 
