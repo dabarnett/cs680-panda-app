@@ -102,19 +102,21 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
+                dbHandler = new DBHandler(context);
 
+                if (isChecked) {
+                    dbHandler.updateStarredStatus( event.getEventID(), "Yes" );
                     Toast.makeText(context, "The event has been starred!", Toast.LENGTH_LONG)
                             .show();
                 } else {
                     // The toggle is disabled
                     Toast.makeText(context, "You've unstarred the event!", Toast.LENGTH_LONG)
                             .show();
+                    dbHandler.updateStarredStatus( event.getEventID(), "No" );
                 }
 
-                dbHandler = new DBHandler(context);
-                dbHandler.updateStarredStatus( event.getEventID(), starred );
+
+
 
             }
         });
