@@ -16,7 +16,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database properties
     private static final String DATABASE_NAME = "pandaDB";
     private static final String TABLE_NAME = "Events";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     private Cursor cursor;
     private ContentValues values;
@@ -25,13 +25,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESC = "description";
+    public static final String KEY_START = "start_time";
+    public static final String KEY_END = "end_time";
     public static final String KEY_ADDRESS = "street_address";
     public static final String KEY_CITY = "city";
     public static final String KEY_STATE = "state";
     public static final String KEY_LINK = "website_link";
     public static final String KEY_NUMBER = "contact_number";
-    public static final String KEY_START = "start_time";
-    public static final String KEY_END = "end_time";
+    public static final String KEY_STARRED = "isStarred";
     public static final String IMG_PATH = "image_path";
 
 
@@ -46,6 +47,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                                 + KEY_STATE + " TEXT, "
                                                 + KEY_LINK + " TEXT, "
                                                 + KEY_NUMBER + " TEXT, "
+                                                + KEY_STARRED + " TEXT, ";
                                                 + IMG_PATH + " TEXT)";
 
 
@@ -94,6 +96,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "MA",
                                 "https://www.facebook.com/events/238965596572122/",
                                 "781-555-2113",
+                                "Yes",
                                 "event_harborcruise") );
         addEvent( new Event( "Red Sox vs Tampa Bay Rays",
                                 "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
@@ -104,6 +107,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "MA",
                                 "https://www.facebook.com/events/271118446666257/",
                                 "781-555-2116",
+                                "No",
                                 "event_redsox") );
         addEvent( new Event( "Celebrating Harry Bentley's Birthday",
                                 "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
@@ -114,6 +118,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "MA",
                                 "https://www.facebook.com/events/1016727698433556/",
                                 "781-555-2115",
+                                "No",
                                 "event_harry_bentley") );
         addEvent( new Event( "The Week of World Food",
                                 "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
@@ -124,6 +129,7 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "MA",
                                 "https://www.facebook.com/events/2079322972294483/",
                                 "781-555-2114",
+                                "No",
                                 "event_world_food") );
     }
 
@@ -140,7 +146,6 @@ public class DBHandler extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
 
             values = new ContentValues();
-            // values.put(KEY_ID, event.getEventID() );
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
             values.put(KEY_START, event.getStartDateTime() );
@@ -150,6 +155,7 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_STATE, event.getState() );
             values.put(KEY_LINK, event.getWebsiteLink() );
             values.put(KEY_NUMBER, event.getContactNumber() );
+            values.put(KEY_STARRED, event.getStarredStatus());
             values.put(IMG_PATH, event.getImagePath() );
 
             // insert function returns -1 if an error occurred OR ID no. of inserted record on success
@@ -169,7 +175,24 @@ public class DBHandler extends SQLiteOpenHelper {
         return success;
     }
 
+    public void updateStarredStatus( int eventID, String starredStatus ){
+        try
+        {
+            SQLiteDatabase db = this.getWritableDatabase();
 
+            values = new ContentValues();
+
+            values.put(KEY_STARRED, starredStatus );
+
+            db.update(TABLE_NAME, values, "_id = ?", new String[]{ Integer.toString(eventID) } );
+
+            db.close();
+        }
+        catch (SQLException e)
+        {
+            Log.d("ADD EVENT ERROR: ", e.getMessage() );
+        }
+    }
 
     public int getRecordCount(){
 
@@ -215,13 +238,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 String state = cursor.getString(cursor.getColumnIndex(KEY_STATE));
                 String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
                 String nmber = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
+                String starred = cursor.getString(cursor.getColumnIndex(KEY_STARRED));
                 String img = cursor.getString(cursor.getColumnIndex(IMG_PATH));
 
 
 
-                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber, img));
+                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber, img, starred));
 
-                Log.d("EVENT: ", Events.get(id - 1).toString());
+                Log.d("EVENT: ", Events.get(id - 1).toString() );
             }
             db.close();
         }

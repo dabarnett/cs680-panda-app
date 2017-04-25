@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/bgEvent"
             android:layout_width="wrap_content"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:scaleType="fitXY"/>
@@ -42,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="185dp"
+            android:layout_marginTop="170dp"
             android:layout_alignParentEnd="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -113,7 +113,7 @@
             android:id="@+id/btnShowLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="View Location"
             android:padding="5dp"
             android:textStyle="bold"
@@ -125,7 +125,7 @@
             android:id="@+id/btnWebsite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="Event Website"
             android:padding="5dp"
             android:textStyle="bold"
@@ -137,12 +137,20 @@
             android:id="@+id/btnContact"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Contact"
+            android:text="Call"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textStyle="bold"
             android:background="#fff"
             android:focusable="true"/>
+
+        <ToggleButton
+            android:id="@+id/btnStarred"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/toggleButton"
+            android:background="@drawable/ic_toggle_bg"/>
 
     </LinearLayout>
 
