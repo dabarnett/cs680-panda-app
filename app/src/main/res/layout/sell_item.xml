@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="15dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <EditText
+                android:id="@+id/txtItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:maxLength="50"
+                android:hint="What item is it"/>
+
+            <EditText
+                android:id="@+id/txtItemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Price"/>
+
+            <EditText
+                android:id="@+id/txtItemCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="City"/>
+
+            <EditText
+                android:id="@+id/txtItemState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="State"/>
+
+            <EditText
+                android:id="@+id/txtItemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Item description"
+                android:lines="2"/>
+
+
+            <EditText
+                android:id="@+id/itemContactNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Contact number"
+                android:lines="2" />
+
+            <Button
+                android:id="@+id/btnSellItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#4e4c4b"
+                android:textColor="#fff"
+                android:text="Save" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

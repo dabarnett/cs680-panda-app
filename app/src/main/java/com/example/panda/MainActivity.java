@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -29,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     private DBHandler dbHandler;
     private SQLiteDatabase db;
-    private SQLiteDatabase db2;
+    //private SQLiteDatabase db2;
     private ArrayList<Event> eventList;
+    private ArrayList<Item> itemList;
     private EventAdapter adapter;
+    private ItemAdapter itemadapter;
     private ListView eventListView;
+    private ListView itemListView;
 
 
 
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             db = dbHandler.getWritableDatabase();
-            db2 = dbHandler.getWritableDatabase();
+            //db2 = dbHandler.getWritableDatabase();
         }
         catch(SQLException e)
         {
@@ -81,14 +85,20 @@ public class MainActivity extends AppCompatActivity {
             {
                 dbHandler.initialiseDatabase();
                 dbHandler.getAllEvents();
+                dbHandler.getAllItems();
             }
 
                 Log.d("DEBUG:", "NOT NEEDED");
                 eventList = dbHandler.getAllEvents();
+                itemList = dbHandler.getAllItems();
 
                 eventListView = (ListView)findViewById(R.id.eventListView);
+                itemListView = (ListView)findViewById(R.id.itemListView);
                 adapter = new EventAdapter(this, R.layout.event_list_item, eventList);
+                itemadapter = new ItemAdapter(this, R.layout.sell_item, itemList);
+
                 eventListView.setAdapter(adapter);
+                itemListView.setAdapter(itemadapter);
 
         }
         catch (Exception e)
@@ -131,7 +141,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(menuIntent);
             return true;
 
+            case R.id.action_sellItem:
+
+                Log.d("MENU ACTION", "SELL ITEM SELECTED");
+                menuIntent = new Intent(this, SellItem.class);
+                startActivity(menuIntent);
+
             default: super.onOptionsItemSelected(item);
+
+
         }
 
         return false;
