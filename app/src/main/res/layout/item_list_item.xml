@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp" >
+
+        <ImageView
+            android:id="@+id/bgitem"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"/>
+
+
+        <TextView
+            android:id="@+id/ItemTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:lines="1"
+            android:text="Item For Sale"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+
+
+        <TextView
+            android:id="@+id/ItemCityState"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="170dp"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="City and State"
+            android:textSize="18sp"
+            android:textColor="#fff" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+
+            <TextView
+                android:id="@+id/ItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:layout_weight="1"
+                android:text="$60"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnItemContact"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Contact"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:background="#fff"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
