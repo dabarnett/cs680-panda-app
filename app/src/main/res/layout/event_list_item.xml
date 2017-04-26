@@ -65,26 +65,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="@string/event_address"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/colorPrimaryDark" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp">
 
             <TextView
                 android:id="@+id/eventDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView
@@ -94,13 +97,10 @@
                 android:lines="1"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark" />
-
-
-        </LinearLayout>
-
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,7 +145,7 @@
         <ToggleButton
             android:id="@+id/btnStarred"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             style="@style/toggleButton"
             android:background="@drawable/ic_toggle_bg"/>
