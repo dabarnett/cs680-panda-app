@@ -2,12 +2,13 @@ package com.example.panda;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.AlertDialogLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,13 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
@@ -64,12 +62,17 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     private EditText txtAddress;
     private EditText txtCity;
     private EditText txtState;
+    private EditText txtStartTime;
+    private EditText txtEndTime;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
+
+
+        this.context = this;
 
         Button btnSaveEvent = (Button) findViewById(R.id.btnSaveEvent);
         btnSaveEvent.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +81,7 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             }
         });
 
-        this.context = this;
-
+        // this sets up the Google Place API to get address suggestions
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -95,7 +97,8 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         txtCity = (EditText) findViewById(R.id.txtEventCity);
         txtState = (EditText) findViewById(R.id.txtEventState);
 
-
+        // the idea behind this section is to minimise duplicate address entry from the API and the
+        // edit fields provided
         // if an address provided by the API is erased from the address field
         // then enable the city and state edit texts for manual entry
         txtAddress.addTextChangedListener(new TextWatcher() {
@@ -120,6 +123,65 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             }
         });
 
+        // this section will call the timepicker when the starttime and endtime editexts are selected.
+        // the ontimesetlistener will determine how to handle the
+        txtStartTime = (EditText) findViewById(R.id.txtStartTime);
+        txtEndTime = (EditText) findViewById(R.id.txtEndTime);
+
+        final TimePickerDialog.OnTimeSetListener startTimeSetListener =
+            new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+                  txtStartTime.setText( String.valueOf(hourOfDay) + ":" + String.valueOf(minute) );
+                }
+            };
+
+        txtStartTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment timePickerFragment = new TimePickerFragment(startTimeSetListener);
+                        timePickerFragment.show(getFragmentManager(), "TimePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("TIMEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
+
+        final TimePickerDialog.OnTimeSetListener endTimeSetListener =
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+                        txtEndTime.setText( String.valueOf(hourOfDay) + ":" + String.valueOf(minute) );
+                    }
+                };
+
+        txtEndTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment timePickerFragment = new TimePickerFragment(endTimeSetListener);
+                        timePickerFragment.show(getFragmentManager(), "TimePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("TIMEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
+        // end of timepicker code for event start and end date
+
+
+
+
     }
 
     // this method is called when a suggestion from the placeautocomplete fragment
@@ -127,7 +189,6 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     @Override
     public void onPlaceSelected(Place place) {
         Log.i("PLACE LISTENER DEBUG", "Place Selected: " + place.getName());
-
 
         txtAddress.setText( place.getName() + ", " + place.getAddress() );
         txtCity.setEnabled(false);
