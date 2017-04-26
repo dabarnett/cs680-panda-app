@@ -12,4 +12,6 @@
     <string name="view_location">View Location</string>
     <string name="event_website">Event Website</string>
     <string name="call">Call</string>
+    <string name="contact">Contact</string>
+    <string name="item_for_sale">Item For Sale</string>
 </resources>

@@ -31,7 +31,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:lines="1"
-            android:text="Item For Sale"
+            android:text="@string/item_for_sale"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#fff"/>
@@ -46,7 +46,7 @@
             android:layout_alignParentEnd="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="City and State"
+            android:text="@string/city_and_state"
             android:textSize="18sp"
             android:textColor="#fff" />
     </RelativeLayout>
@@ -73,7 +73,6 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:layout_weight="1"
-                android:text="$60"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark" />
@@ -92,7 +91,7 @@
             android:id="@+id/btnItemContact"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Contact"
+            android:text="@string/contact"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textStyle="bold"
