@@ -6,6 +6,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,33 +27,42 @@
             android:layout_height="wrap_content"
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
 
+
         <EditText
             android:id="@+id/txtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:hint="Street Address"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp" >
 
         <EditText
             android:id="@+id/txtEventCity"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:hint="City"/>
+
+
 
         <EditText
             android:id="@+id/txtEventState"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:hint="State"/>
+    </LinearLayout>
 
         <EditText
             android:id="@+id/txtWebsite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Event Website"/>
+            android:hint="Event Website. eg. www.funstuff.com"/>
 
         <EditText
             android:id="@+id/txtDescription"
@@ -62,21 +72,33 @@
             android:hint="Event description"
             android:lines="2"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp" >
+
+        <EditText
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Date" />
+
         <EditText
             android:id="@+id/txtStartTime"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Start Time"
-            android:lines="2"/>
+            android:layout_weight="1"
+            android:hint="Start Time" />
 
         <EditText
             android:id="@+id/txtEndTime"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="End Time"
-            android:lines="2"/>
+            android:layout_weight="1"
+            android:hint="End Time" />
+    </LinearLayout>
 
 
         <EditText

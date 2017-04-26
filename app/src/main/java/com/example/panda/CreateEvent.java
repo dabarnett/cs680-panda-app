@@ -2,14 +2,14 @@ package com.example.panda;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.AlertDialogLayout;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +45,7 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     private String userEventDescription;
     private String userEventWebsite;
     private String userContactNumber;
+    private String userEventDate;
     private String userEventStartTime;
     private String userEventEndTime;
     private String userStarred;
@@ -61,12 +62,18 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     private EditText txtAddress;
     private EditText txtCity;
     private EditText txtState;
+    private EditText txtDate;
+    private EditText txtStartTime;
+    private EditText txtEndTime;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
+
+
+        this.context = this;
 
         Button btnSaveEvent = (Button) findViewById(R.id.btnSaveEvent);
         btnSaveEvent.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +82,15 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             }
         });
 
-        this.context = this;
 
+
+
+
+        txtAddress = (EditText) findViewById(R.id.txtAddress);
+        txtCity = (EditText) findViewById(R.id.txtEventCity);
+        txtState = (EditText) findViewById(R.id.txtEventState);
+
+        // this sets up the Google Place API to get address suggestions
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -88,34 +102,97 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         autocompleteFragment.setHint("Pick an event location");
 
 
-        txtAddress = (EditText) findViewById(R.id.txtAddress);
-        txtCity = (EditText) findViewById(R.id.txtEventCity);
-        txtState = (EditText) findViewById(R.id.txtEventState);
-
-
-        // if an address provided by the API is erased from the address field
-        // then enable the city and state edit texts for manual entry
-        txtAddress.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //Before user enters the text
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //On user changes the text
-                if(s.toString().trim().length()==0) {
-                   txtCity.setEnabled(true);
-                   txtState.setEnabled(true);
+        // this section will call the timepicker when the starttime and endtime editexts are selected.
+        // the ontimesetlistener will determine how to handle the
+        txtStartTime = (EditText) findViewById(R.id.txtStartTime);
+        final TimePickerDialog.OnTimeSetListener startTimeSetListener =
+            new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+                  // change 24 hour time to 12 hour time format with am/pm
+                  boolean isPM = (hourOfDay >= 12);
+                  txtStartTime.setText( String.format("%02d:%02d %s", (hourOfDay == 12 || hourOfDay == 0) ? 12 : hourOfDay % 12, minute, isPM ? "PM" : "AM") );
                 }
-            }
+            };
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                //After user is done entering the text
+        txtStartTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment timePickerFragment = new TimePickerFragment(startTimeSetListener);
+                        timePickerFragment.show(getFragmentManager(), "TimePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("TIMEPICKER DEBUG", e.getMessage());
+                    }
+                }
 
             }
         });
+
+        final TimePickerDialog.OnTimeSetListener endTimeSetListener =
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+                        boolean isPM = (hourOfDay >= 12);
+                        txtEndTime.setText( String.format("%02d:%02d %s", (hourOfDay == 12 || hourOfDay == 0) ? 12 : hourOfDay % 12, minute, isPM ? "PM" : "AM") );
+                    }
+                };
+
+
+        // does same as aboe but for end time
+        txtEndTime = (EditText) findViewById(R.id.txtEndTime);
+        txtEndTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment timePickerFragment = new TimePickerFragment(endTimeSetListener);
+                        timePickerFragment.show(getFragmentManager(), "TimePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("TIMEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
+        // end of timepicker code for event start and end date
+
+
+        //this section is similar to the time section except that it calls a date picker
+        // when the start date is chosen
+        txtDate = (EditText) findViewById(R.id.txtDate);
+        final DatePickerDialog.OnDateSetListener startDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+                    txtDate.setText( String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year) );
+                }
+            };
+        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment datePickerFragment = new DatePickerFragment(startDateSetListener);
+                        datePickerFragment.show(getFragmentManager(), "DatePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("DATEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
+
+
+
+
 
     }
 
@@ -124,8 +201,6 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     @Override
     public void onPlaceSelected(Place place) {
         Log.i("PLACE LISTENER DEBUG", "Place Selected: " + place.getName());
-
-
         txtAddress.setText( place.getName() + ", " + place.getAddress() );
         txtCity.setEnabled(false);
         txtState.setEnabled(false);
@@ -162,15 +237,14 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         userEventCity = ( (EditText) findViewById(R.id.txtEventCity) ).getText().toString();
         userEventState = ( (EditText) findViewById(R.id.txtEventState) ).getText().toString();
         userEventDescription = ( (EditText) findViewById(R.id.txtDescription) ).getText().toString();
+        userEventDate = ( (EditText) findViewById(R.id.txtDate) ).getText().toString();
         userEventStartTime = ( (EditText) findViewById(R.id.txtStartTime) ).getText().toString();
         userEventEndTime = ( (EditText) findViewById(R.id.txtEndTime) ).getText().toString();
         userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
         userContactNumber = ( (EditText) findViewById(R.id.contactNumber) ).getText().toString();
         userStarred = "No";
-        Event userEvent = new Event(userEventTitle, userEventDescription, userEventStartTime,
-                                        userEventEndTime, userEventAddress, userEventCity,
-                                            userEventState, userEventWebsite, userContactNumber,
-                                                userStarred);
+        Event userEvent = new Event(userEventTitle, userEventDescription, userEventDate, userEventStartTime, userEventEndTime,
+                                    userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber, userStarred);
 
 
         // pass event object to the db handler class

@@ -66,6 +66,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView tvEventCityState = (TextView) row.findViewById(R.id.eventCityState);
         tvEventCityState.setText( event.getCity() + ", " + event.getState() );
 
+        TextView tvEventDate = (TextView) row.findViewById(R.id.eventDate);
+        tvEventDate.setText( event.getDate() );
+
+        TextView tvEventTimeSpan = (TextView) row.findViewById(R.id.eventTimeSpan);
+        tvEventTimeSpan.setText( event.getStartTime() + " - " + event.getEndTime() );
+
         ImageView imgEvent = (ImageView) row.findViewById(R.id.bgEvent);
         if( event.getImagePath() == null || event.getImagePath().isEmpty() )
         {
