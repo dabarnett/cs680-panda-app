@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -83,7 +82,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(QUERY_CREATE_TABLE);
-        db.execSQL(ITEM_QUERY_CREATE_TABLE);;
+        db.execSQL(ITEM_QUERY_CREATE_TABLE);
     }
 
 
@@ -108,7 +107,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void initialiseDatabase() {
 
         // create some new events using the custom event class (Event.java)
-        // One of the constructors accepts the name, description, address (street address, city, state) and website link of an event
+        // One of the constructors accepts the name, description, address (street address, city,
+        // state) and website link of an event
         addEvent( new Event( "Annual GSA Boston Harbor Cruise",
                                 "Details and tickets to follow soon.",
                                 "1PM",
@@ -121,7 +121,9 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "Yes",
                                 "event_harborcruise") );
         addEvent( new Event( "Red Sox vs Tampa Bay Rays",
-                                "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
+                                "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park" +
+                                        " Boston with GSA and start your weekend on a fun note. " +
+                                        "Tickets are Available on My Bentley",
                                 "6PM",
                                 "9PM",
                                 "Fenway Park 4 Yawkey Way",
@@ -132,7 +134,14 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "No",
                                 "event_redsox") );
         addEvent( new Event( "Celebrating Harry Bentley's Birthday",
-                                "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
+                                "A time capsule from Bentley’s 75th anniversary will be on " +
+                                        "display in the library all day, and students, faculty, " +
+                                        "staff, alumni, and all other members of our community " +
+                                        "can use this as inspiration for contributing their own " +
+                                        "items into Bentley’s Centennial time capsule. We will " +
+                                        "begin celebrating Harry Bentley’s birthday in the Pub, " +
+                                        "where there will be cake, food, and the reading of a " +
+                                        "letter written at Bentley's 75th anniversary.",
                                 "3PM",
                                 "8PM",
                                 "Bentley University, 175 Forest Street",
@@ -143,7 +152,9 @@ public class DBHandler extends SQLiteOpenHelper {
                                 "No",
                                 "event_harry_bentley") );
         addEvent( new Event( "The Week of World Food",
-                                "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
+                                "Please stop by in the smith lobby next week from March 27th to " +
+                                        "30th to enjoy GSA's yearly diversity event. Each day we " +
+                                        "have food from a different region in the world.",
                                 "2PM",
                                 "5PM",
                                 "Bentley University, 175 Forest St",
@@ -208,7 +219,7 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_STARRED, event.getStarredStatus());
             values.put(IMG_PATH, event.getImagePath() );
 
-            // insert function returns -1 if an error occurred OR ID no. of inserted record on success
+            //insert function returns -1 if an error occurred OR ID no. of inserted record on success
            if( db.insert(TABLE_NAME, null, values) != -1 )
            {
                success = true;
@@ -261,8 +272,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return rowCount;
 
-
-
     }
 
 
@@ -271,7 +280,8 @@ public class DBHandler extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
 
-            // query(String table, String[] columns, String whereClause, String[] whereArgs, String groupBy, String having, String orderBy)
+            // query(String table, String[] columns, String whereClause, String[] whereArgs,
+            // String groupBy, String having, String orderBy)
             cursor = db.rawQuery("select * from " + TABLE_NAME, null);
 
             //write contents of Cursor to list
@@ -293,7 +303,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
 
-                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber, starred, img));
+                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber,
+                            starred, img));
 
                 Log.d("EVENT: ", Events.get(id - 1).toString() );
             }
@@ -360,8 +371,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return rowCount;
 
-
-
     }
 
 
@@ -369,8 +378,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // query(String table, String[] columns, String whereClause, String[] whereArgs, String groupBy, String having, String orderBy)
-        cursor = db.rawQuery("select * from " + ITEM_TABLE_NAME, null);;
+        // query(String table, String[] columns, String whereClause, String[] whereArgs, String
+        // groupBy, String having, String orderBy)
+        cursor = db.rawQuery("select * from " + ITEM_TABLE_NAME, null);
 
         //write contents of Cursor to list
         Items = new ArrayList<Item>();

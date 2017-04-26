@@ -1,15 +1,11 @@
 package com.example.panda;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActivityChooserView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -76,9 +71,10 @@ public class EventAdapter extends ArrayAdapter<Event> {
         {
              event.setImagePath( "event_default_img" );
         }
-            // the line below will find the id of the image resource with a matching name and then get set the resource
-            // with the matching id to the imageview
-            int resourceID = context.getResources().getIdentifier( event.getImagePath(), "drawable", context.getPackageName() );
+            // the line below will find the id of the image resource with a matching name and
+            //then get set the resource with the matching id to the imageview
+            int resourceID = context.getResources().getIdentifier( event.getImagePath(), "drawable",
+                            context.getPackageName() );
             imgEvent.setImageResource( resourceID );
 
         Button btnViewLocation = (Button) row.findViewById(R.id.btnShowLocation);
@@ -116,7 +112,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
             toggle.setChecked(true);
         }
         else {
-            Toast.makeText(context, "There is a problem here! Starred status is " + event.getStarredStatus(), Toast.LENGTH_LONG)
+            Toast.makeText(context, "There is a problem here! Starred status is " +
+                            event.getStarredStatus(), Toast.LENGTH_LONG)
                     .show();
         }
 
@@ -149,7 +146,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public void openMap(String streetAddress, String city, String state){
 
 
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW,  Uri.parse("geo:0,0?q=" + Uri.encode(streetAddress + ", " + city) ));
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW,  Uri.parse("geo:0,0?q=" +
+                                        Uri.encode(streetAddress + ", " + city) ));
 
         if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
                 context.startActivity(mapIntent);

@@ -1,7 +1,5 @@
 package com.example.panda;
 
-import java.text.SimpleDateFormat;
-
 
 public class Item {
 
@@ -14,7 +12,8 @@ public class Item {
     private String itemcontactNumber;
 
 
-    public Item(int id, String itemName, String itemDescription, String itemPrice, String itemcity, String itemstate, String itemcontactNumber ){
+    public Item(int id, String itemName, String itemDescription, String itemPrice, String
+                    itemcity, String itemstate, String itemcontactNumber ){
         this.id = id;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -24,7 +23,8 @@ public class Item {
         this.itemcontactNumber = itemcontactNumber;
     }
 
-    public Item(String itemName, String itemDescription, String itemPrice, String itemcity, String itemstate, String itemcontactNumber ){
+    public Item(String itemName, String itemDescription, String itemPrice, String itemcity,
+                    String itemstate, String itemcontactNumber ){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
@@ -64,7 +64,8 @@ public class Item {
 
 
     public String toString(){
-        return "id: " + id + ", ItemName: " + itemName + ", contactNumber: " + itemcontactNumber + ", itemPrice: " + itemPrice;
+        return "id: " + id + ", ItemName: " + itemName + ", contactNumber: " + itemcontactNumber
+                + ", itemPrice: " + itemPrice;
     }
 
 

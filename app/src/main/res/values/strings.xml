@@ -2,4 +2,7 @@
     <string name="app_name">PaNDa</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_maps">Map</string>
+    <string name="menu_create_event">Create new event</string>
+    <string name="menu_show_starred">Show starred events</string>
+    <string name="menu_sell_item">Sell an item</string>
 </resources>

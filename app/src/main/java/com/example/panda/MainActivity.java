@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TabHost;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -130,13 +129,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MENU ACTION", "CREATE EVENT SELECTED");
                     Intent menuIntent = new Intent(this, CreateEvent.class);
                     startActivity(menuIntent);
-            return true;
+                return true;
+
+            case R.id.action_showStarred:
+
+                Log.d("MENU ACTION", "SHOW STARRED EVENTS SELECTED");
+                menuIntent = new Intent(this, ShowStarred.class);
+                startActivity(menuIntent);
+                return true;
 
             case R.id.action_sellItem:
 
                 Log.d("MENU ACTION", "SELL ITEM SELECTED");
                 menuIntent = new Intent(this, SellItem.class);
                 startActivity(menuIntent);
+                return true;
 
             default: super.onOptionsItemSelected(item);
 

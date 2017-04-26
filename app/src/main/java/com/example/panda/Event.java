@@ -1,7 +1,5 @@
 package com.example.panda;
 
-import java.text.SimpleDateFormat;
-
 
 public class Event {
 
@@ -21,7 +19,9 @@ public class Event {
 
 
 
-    public Event(int id, String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath){
+    public Event(int id, String eventName, String eventDescription, String startDateTime,
+                    String endDateTime, String streetAddress, String city, String state, String
+                         websiteLink, String contactNumber, String starred, String imagePath){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
@@ -37,7 +37,9 @@ public class Event {
     }
 
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred  ){
+    public Event(String eventName, String eventDescription, String startDateTime, String
+                    endDateTime, String streetAddress, String city, String state, String websiteLink,
+                        String contactNumber, String starred  ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -47,11 +49,13 @@ public class Event {
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
-        this.starred = starred;;
+        this.starred = starred;
     }
 
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath ){
+    public Event(String eventName, String eventDescription, String startDateTime, String
+                    endDateTime, String streetAddress, String city, String state, String
+                        websiteLink, String contactNumber, String starred, String imagePath ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.startDateTime = startDateTime;
@@ -112,10 +116,13 @@ public class Event {
         this.imagePath = imagePath;
     }
 
-    // this function is mostly for testing purposes. It will print the value of each event object in a string.
+    // this function is mostly for testing purposes. It will print the value of each event
+    // object in a string.
     public String toString(){
         return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress +
-                ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", startDateTime: " + startDateTime + ", endDateTime: " + endDateTime + ", imagePath: " + imagePath + ", starred: " + starred;
+                ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber +
+                ", startDateTime: " + startDateTime + ", endDateTime: " + endDateTime +
+                ", imagePath: " + imagePath + ", starred: " + starred;
     }
 
 

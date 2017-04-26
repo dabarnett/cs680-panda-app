@@ -6,13 +6,19 @@
     <item
         android:id="@+id/action_createEvent"
         android:orderInCategory="100"
-        android:title="Create new event"
+        android:title="@string/menu_create_event"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_showStarred"
+        android:orderInCategory="200"
+        android:title="@string/menu_show_starred"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_sellItem"
-        android:orderInCategory="200"
-        android:title="Sell an item"
+        android:orderInCategory="300"
+        android:title="@string/menu_sell_item"
         app:showAsAction="never" />
 
 </menu>

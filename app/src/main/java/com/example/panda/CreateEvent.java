@@ -16,16 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
@@ -58,7 +54,8 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
 
     private GoogleApiClient mGoogleApiClient;
     // this will be used to bias, but not limit, the search results in the place API to the US
-    private static final LatLngBounds BOUNDS_USA = new LatLngBounds( new LatLng(-125.0011, 24.9493), new LatLng(-66.9326, 49.5904) );
+    private static final LatLngBounds BOUNDS_USA = new LatLngBounds( new LatLng(-125.0011, 24.9493),
+                                                                        new LatLng(-66.9326, 49.5904) );
 
 
     private EditText txtAddress;
@@ -170,8 +167,10 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
         userContactNumber = ( (EditText) findViewById(R.id.contactNumber) ).getText().toString();
         userStarred = "No";
-        Event userEvent = new Event(userEventTitle, userEventDescription, userEventStartTime, userEventEndTime,
-                                    userEventAddress, userEventCity, userEventState, userEventWebsite, userContactNumber, userStarred);
+        Event userEvent = new Event(userEventTitle, userEventDescription, userEventStartTime,
+                                        userEventEndTime, userEventAddress, userEventCity,
+                                            userEventState, userEventWebsite, userContactNumber,
+                                                userStarred);
 
 
         // pass event object to the db handler class
@@ -197,7 +196,8 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             dialog.setTitle("Sorry");
             dialog.setMessage("There was an error creating your event.");
 
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",	new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",
+                                new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Go back to event list
@@ -213,7 +213,8 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             dialog.setTitle("Congrats!");
             dialog.setMessage("Your event was created");
 
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",	new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",
+                                new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Go back to event list

@@ -2,21 +2,16 @@ package com.example.panda;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.AlertDialogLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
 
 
 /*
@@ -72,7 +67,8 @@ public class SellItem extends Activity {
         //userEventEndTime = ( (EditText) findViewById(R.id.txtEndTime) ).getText().toString();
         //userEventWebsite = ( (EditText) findViewById(R.id.txtWebsite) ).getText().toString();
         userItemContactNumber = ( (EditText) findViewById(R.id.itemContactNumber) ).getText().toString();
-        Item userItem = new Item(userItemTitle, userItemDescription, userItemPrice, userItemCity, userItemState, userItemContactNumber);
+        Item userItem = new Item(userItemTitle, userItemDescription, userItemPrice, userItemCity,
+                                    userItemState, userItemContactNumber);
 
 
         // pass event object to the db handler class
@@ -98,7 +94,8 @@ public class SellItem extends Activity {
             dialog.setTitle("Sorry");
             dialog.setMessage("There was an error creating your post.");
 
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",	new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",
+                                new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Go back to item list
@@ -114,7 +111,8 @@ public class SellItem extends Activity {
             dialog.setTitle("Congrats!");
             dialog.setMessage("Your Item sale was created");
 
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",	new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",
+                                new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                     // Go back to item list
