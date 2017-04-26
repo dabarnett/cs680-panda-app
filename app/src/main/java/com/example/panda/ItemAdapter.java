@@ -63,7 +63,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         tvItemPrice.setText( item.getItemPrice());
 
         ImageView imgItem = (ImageView) row.findViewById(R.id.bgitem);
-        imgItem.setImageResource(R.drawable.event_harborcruise);
         if( item.getItemImage() == null || item.getItemImage().isEmpty() )
         {
             item.setItemImage( "default_img" );

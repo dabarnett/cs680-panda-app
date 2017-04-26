@@ -241,7 +241,52 @@ public class DBHandler extends SQLiteOpenHelper {
         return success;
     }
 
+    public ArrayList<Event> getStarredEvents(){
+
+        ArrayList<Event> starredEvents = new ArrayList<Event>();
+
+        try
+        {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_STARRED + " = 'YES' ", null);
+
+
+            while ( cursor.moveToNext() ) {
+                int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
+                String date = cursor.getString(cursor.getColumnIndex(KEY_DATE));
+                String start = cursor.getString(cursor.getColumnIndex(KEY_START));
+                String end = cursor.getString(cursor.getColumnIndex(KEY_END));
+                String addr = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
+                String city = cursor.getString(cursor.getColumnIndex(KEY_CITY));
+                String state = cursor.getString(cursor.getColumnIndex(KEY_STATE));
+                String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
+                String nmber = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
+                String starred = cursor.getString(cursor.getColumnIndex(KEY_STARRED));
+                String img = cursor.getString(cursor.getColumnIndex(KEY_IMG));
+
+
+
+                Events.add(new Event(id, name, desc, date, start, end, addr, city, state, link, nmber, starred, img));
+
+                Log.d("STARRED EVENTS: ", Events.get(id - 1).toString() );
+            }
+
+
+            db.close();
+        }
+        catch (SQLException e)
+        {
+            Log.d("STARRED EVENT ERROR: ", e.getMessage() );
+        }
+        return starredEvents;
+    }
+
+
     public void updateStarredStatus( int eventID, String starredStatus ){
+
         try
         {
             SQLiteDatabase db = this.getWritableDatabase();
