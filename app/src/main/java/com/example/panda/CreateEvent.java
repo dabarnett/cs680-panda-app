@@ -2,6 +2,7 @@ package com.example.panda;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -62,7 +63,9 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
     private EditText txtAddress;
     private EditText txtCity;
     private EditText txtState;
+    private EditText txtStartDate;
     private EditText txtStartTime;
+    private EditText txtEndDate;
     private EditText txtEndTime;
 
 
@@ -126,8 +129,6 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         // this section will call the timepicker when the starttime and endtime editexts are selected.
         // the ontimesetlistener will determine how to handle the
         txtStartTime = (EditText) findViewById(R.id.txtStartTime);
-        txtEndTime = (EditText) findViewById(R.id.txtEndTime);
-
         final TimePickerDialog.OnTimeSetListener startTimeSetListener =
             new TimePickerDialog.OnTimeSetListener() {
                 @Override
@@ -161,6 +162,9 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
                     }
                 };
 
+
+        // does same as aboe but for end time
+        txtEndTime = (EditText) findViewById(R.id.txtEndTime);
         txtEndTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
@@ -178,6 +182,59 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
             }
         });
         // end of timepicker code for event start and end date
+
+
+        //this section is similar to the time section except that it calls a date picker
+        // when the start date is chosen
+        txtStartDate = (EditText) findViewById(R.id.txtStartDate);
+        final DatePickerDialog.OnDateSetListener startDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+                    txtStartDate.setText( String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year) );
+                }
+            };
+        txtStartDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment datePickerFragment = new DatePickerFragment(startDateSetListener);
+                        datePickerFragment.show(getFragmentManager(), "DatePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("DATEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
+
+        txtEndDate = (EditText) findViewById(R.id.txtEndtDate);
+        final DatePickerDialog.OnDateSetListener endDateSetListener =
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+                        txtEndDate.setText( String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year) );
+                    }
+                };
+        txtEndDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    try
+                    {
+                        DialogFragment datePickerFragment = new DatePickerFragment(endDateSetListener);
+                        datePickerFragment.show(getFragmentManager(), "DatePicker");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.d("DATEPICKER DEBUG", e.getMessage());
+                    }
+                }
+
+            }
+        });
 
 
 
