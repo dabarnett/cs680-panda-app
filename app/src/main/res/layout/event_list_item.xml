@@ -34,7 +34,7 @@
             android:text="@string/event_title"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="#fff"/>
+            android:textColor="@color/colorAccent"/>
 
 
         <TextView
@@ -48,7 +48,7 @@
             android:paddingRight="10dp"
             android:text="@string/city_and_state"
             android:textSize="18sp"
-            android:textColor="#fff" />
+            android:textColor="@color/colorAccent" />
     </RelativeLayout>
 
     <LinearLayout
