@@ -7,48 +7,46 @@
     android:background="#fff">
 
 
+    <TextView
+        android:id="@+id/ItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:lines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/item_for_sale"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp" >
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/bgitem"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:scaleType="fitXY"/>
-
-
-        <TextView
-            android:id="@+id/ItemTitle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:lines="1"
-            android:text="@string/item_for_sale"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#fff"/>
+            android:scaleType="fitXY" />
 
 
         <TextView
             android:id="@+id/ItemCityState"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="170dp"
-            android:layout_alignParentEnd="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/city_and_state"
-            android:textSize="18sp"
-            android:textColor="#fff" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <LinearLayout

@@ -442,7 +442,7 @@ public class DBHandler extends SQLiteOpenHelper {
             String itemname = cursor.getString(cursor.getColumnIndex(KEY_ITEM_NAME));
             String itemdesc = cursor.getString(cursor.getColumnIndex(KEY_ITEM_DESC));
             String itemprice = cursor.getString(cursor.getColumnIndex(KEY_ITEM_PRICE));
-            String itemcity = cursor.getString(cursor.getColumnIndex(KEY_ITEM_NAME));
+            String itemcity = cursor.getString(cursor.getColumnIndex(KEY_ITEM_CITY));
             String itemstate = cursor.getString(cursor.getColumnIndex(KEY_ITEM_STATE));
             String itemnmber = cursor.getString(cursor.getColumnIndex(KEY_ITEM_NUMBER));
             String itemimg = cursor.getString(cursor.getColumnIndex(KEY_ITEM_IMG));
