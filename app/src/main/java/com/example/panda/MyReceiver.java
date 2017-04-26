@@ -23,7 +23,7 @@ public class MyReceiver extends BroadcastReceiver {
         //collects the thread name and magic number from the main activity
         //and composes the notification and log message
         String eventName = intent.getStringExtra("eventName");
-        notificationMessage = "A new event named " + eventName + " have been created";
+        notificationMessage = "A new event named " + eventName + " has been created";
 
         //writes the number and thread to the log with the tag Magic
         Log.i("Magic", notificationMessage);
