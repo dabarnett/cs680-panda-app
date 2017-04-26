@@ -59,6 +59,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         TextView tvItemCityState = (TextView) row.findViewById(R.id.ItemCityState);
         tvItemCityState.setText( item.getItemCity() + ", " + item.getItemState() );
 
+        TextView tvItemPrice = (TextView) row.findViewById(R.id.ItemPrice);
+        tvItemPrice.setText( item.getItemPrice());
+
         ImageView imgItem = (ImageView) row.findViewById(R.id.bgitem);
         imgItem.setImageResource(R.drawable.event_harborcruise);
 
