@@ -61,6 +61,15 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         ImageView imgItem = (ImageView) row.findViewById(R.id.bgitem);
         imgItem.setImageResource(R.drawable.event_harborcruise);
+        if( item.getItemImage() == null || item.getItemImage().isEmpty() )
+        {
+            item.setItemImage( "default_img" );
+        }
+        // the line below will find the id of the image resource with a matching name and
+        //then get set the resource with the matching id to the imageview
+        int resourceID = context.getResources().getIdentifier( item.getItemImage(), "drawable",
+                context.getPackageName() );
+        imgItem.setImageResource( resourceID );
 
 
         Button btnItemContact = (Button) row.findViewById(R.id.btnItemContact);

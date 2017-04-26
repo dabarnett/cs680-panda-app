@@ -71,7 +71,7 @@ public class ShowStarred extends ArrayAdapter<Event> {
         ImageView imgEvent = (ImageView) row.findViewById(R.id.bgEvent);
         if( event.getImagePath() == null || event.getImagePath().isEmpty() )
         {
-            event.setImagePath( "event_default_img" );
+            event.setImagePath( "default_img" );
         }
         // the line below will find the id of the image resource with a matching name and
         //then get set the resource with the matching id to the imageview
