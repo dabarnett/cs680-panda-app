@@ -35,7 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_LINK = "website_link";
     public static final String KEY_NUMBER = "contact_number";
     public static final String KEY_STARRED = "isStarred";
-    public static final String IMG_PATH = "image_path";
+    public static final String KEY_IMG = "image_path";
 
     public static final String KEY_ITEM_ID = "id";
     public static final String KEY_ITEM_NAME = "name";
@@ -44,6 +44,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_ITEM_CITY = "city";
     public static final String KEY_ITEM_STATE = "state";
     public static final String KEY_ITEM_NUMBER = "contact_number";
+    public static final String KEY_ITEM_IMG = "image_path";
 
 
     public static final String QUERY_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
@@ -59,7 +60,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_LINK + " TEXT, "
             + KEY_NUMBER + " TEXT, "
             + KEY_STARRED + " TEXT, "
-            + IMG_PATH + " TEXT)";
+            + KEY_IMG + " TEXT)";
 
     public static final String ITEM_QUERY_CREATE_TABLE = "CREATE TABLE " + ITEM_TABLE_NAME + " ("
             + KEY_ITEM_ID + " INTEGER primary key autoincrement,"
@@ -68,7 +69,8 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ITEM_DESC + " TEXT, "
             + KEY_ITEM_CITY + " TEXT, "
             + KEY_ITEM_STATE + " TEXT, "
-            + KEY_ITEM_NUMBER + " TEXT)" ;
+            + KEY_ITEM_NUMBER + " TEXT, "
+            + KEY_ITEM_IMG + " TEXT)";
 
 
     private ArrayList<Event> Events;
@@ -160,34 +162,40 @@ public class DBHandler extends SQLiteOpenHelper {
                 "No",
                 "event_world_food") );
 
+
+
         // initialise item table for demo
         addItem( new Item( "Tape Drive",
                 "LTO 4 Tape Drive.",
                 "$400",
                 "Boston",
                 "MA",
-                "781-555-2113") );
+                "781-555-2113",
+                "item_tapedrive") );
 
         addItem( new Item( "Proliant G4 Server",
                 "HP Proliant G4 Server",
                 "$400",
                 "Wilmington",
                 "MA",
-                "781-555-2115") );
+                "781-555-2115",
+                "item_proliantg4_server") );
 
         addItem( new Item( "LTO 4 Tapes",
                 "LTO 4 Tapes",
                 "$100",
                 "Waltham",
                 "MA",
-                "781-555-2119") );
+                "781-555-2119",
+                "item_lto4_tape") );
 
         addItem( new Item( "Rockstar Punched",
                 "Best Energy Drink Ever",
                 "$4",
                 "Stoneham",
                 "MA",
-                "781-555-2112") );
+                "781-555-2112",
+                "item_rockstar") );
     }
 
 
@@ -214,7 +222,7 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_LINK, event.getWebsiteLink() );
             values.put(KEY_NUMBER, event.getContactNumber() );
             values.put(KEY_STARRED, event.getStarredStatus());
-            values.put(IMG_PATH, event.getImagePath() );
+            values.put(KEY_IMG, event.getImagePath() );
 
             //insert function returns -1 if an error occurred OR ID no. of inserted record on success
            if( db.insert(TABLE_NAME, null, values) != -1 )
@@ -297,7 +305,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 String link = cursor.getString(cursor.getColumnIndex(KEY_LINK));
                 String nmber = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
                 String starred = cursor.getString(cursor.getColumnIndex(KEY_STARRED));
-                String img = cursor.getString(cursor.getColumnIndex(IMG_PATH));
+                String img = cursor.getString(cursor.getColumnIndex(KEY_IMG));
 
 
 
@@ -331,6 +339,7 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put(KEY_ITEM_CITY, item.getItemCity() );
             values.put(KEY_ITEM_STATE, item.getItemState() );
             values.put(KEY_ITEM_NUMBER, item.getItemContactNumber() );
+            values.put(KEY_ITEM_IMG, item.getItemImage() );
 
             // insert function returns -1 if an error occurred OR ID no. of inserted record on success
             if( db.insert(ITEM_TABLE_NAME, null, values) != -1 )
@@ -391,10 +400,11 @@ public class DBHandler extends SQLiteOpenHelper {
             String itemcity = cursor.getString(cursor.getColumnIndex(KEY_ITEM_NAME));
             String itemstate = cursor.getString(cursor.getColumnIndex(KEY_ITEM_STATE));
             String itemnmber = cursor.getString(cursor.getColumnIndex(KEY_ITEM_NUMBER));
+            String itemimg = cursor.getString(cursor.getColumnIndex(KEY_ITEM_IMG));
 
 
 
-            Items.add(new Item(itemid, itemname, itemdesc, itemprice, itemcity, itemstate, itemnmber));
+            Items.add(new Item(itemid, itemname, itemdesc, itemprice, itemcity, itemstate, itemnmber, itemimg));
 
             Log.d("ITEMS: ", Items.get(itemid - 1).toString() );
         }

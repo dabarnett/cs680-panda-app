@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/alert_animation" android:oneshot="false">
-  <item android:drawable="@drawable/success_anim1" android:duration="150" />
-  <item android:drawable="@drawable/success_anim2" android:duration="150" />
-  <item android:drawable="@drawable/success_anim3" android:duration="150" />
-  <item android:drawable="@drawable/success_anim4" android:duration="150" />
-  <item android:drawable="@drawable/success_anim5" android:duration="150" />
-  <item android:drawable="@drawable/success_anim6" android:duration="150" />
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/alert_animation" android:oneshot="true">
+  <item android:drawable="@drawable/success_anim1" android:duration="120" />
+  <item android:drawable="@drawable/success_anim2" android:duration="120" />
+  <item android:drawable="@drawable/success_anim3" android:duration="120" />
+  <item android:drawable="@drawable/success_anim4" android:duration="120" />
+  <item android:drawable="@drawable/success_anim5" android:duration="120" />
+  <item android:drawable="@drawable/success_anim6" android:duration="120" />
+  <item android:drawable="@drawable/success_anim7" android:duration="120" />
+  <item android:drawable="@drawable/success_anim8" android:duration="120" />
+  <item android:drawable="@drawable/success_anim9" android:duration="120" />
+  <item android:drawable="@drawable/success_anim10" android:duration="120" />
 </animation-list>

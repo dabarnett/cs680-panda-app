@@ -10,11 +10,23 @@ public class Item {
     private String itemcity;
     private String itemstate;
     private String itemcontactNumber;
+    private String itemImage;
 
 
     public Item(int id, String itemName, String itemDescription, String itemPrice, String
-                    itemcity, String itemstate, String itemcontactNumber ){
+                    itemcity, String itemstate, String itemcontactNumber, String itemImage ){
         this.id = id;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemcity = itemcity;
+        this.itemstate = itemstate;
+        this.itemcontactNumber = itemcontactNumber;
+        this.itemImage = itemImage;
+    }
+
+    public Item(String itemName, String itemDescription, String itemPrice, String itemcity,
+                String itemstate, String itemcontactNumber ){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
@@ -23,14 +35,16 @@ public class Item {
         this.itemcontactNumber = itemcontactNumber;
     }
 
+
     public Item(String itemName, String itemDescription, String itemPrice, String itemcity,
-                    String itemstate, String itemcontactNumber ){
+                    String itemstate, String itemcontactNumber, String itemImage ){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
         this.itemcity = itemcity;
         this.itemstate = itemstate;
         this.itemcontactNumber = itemcontactNumber;
+        this.itemImage = itemImage;
     }
 
     public int getItemID(){
@@ -61,6 +75,11 @@ public class Item {
 
     public String getItemContactNumber() {return itemcontactNumber; }
 
+    public String getItemImage() {return itemImage; }
+
+    public void setItemImage(String itemImage){
+        this.itemImage = itemImage;
+    }
 
 
     public String toString(){
