@@ -5,19 +5,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 // This adapter allows us to customise the event listview
@@ -44,7 +48,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public View getView(final int position, View row, ViewGroup parent) {
 
         final Event event = getItem(position);
-
 
         // Check if an existing view is being reused, otherwise inflate the view
         // using the event_list_item.xml as a template
@@ -105,6 +108,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         ToggleButton toggle = (ToggleButton) row.findViewById(R.id.btnStarred);
         final String starred = event.getStarredStatus();
+
         if (starred.equals("No")) {
             toggle.setChecked(false);
         }

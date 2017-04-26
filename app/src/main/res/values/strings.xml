@@ -5,4 +5,11 @@
     <string name="menu_create_event">Create new event</string>
     <string name="menu_show_starred">Show starred events</string>
     <string name="menu_sell_item">Sell an item</string>
+    <string name="event_address">Event Address</string>
+    <string name="city_and_state">City and State</string>
+    <string name="event_title">Event Title</string>
+    <string name="image_desc">Event Picture</string>
+    <string name="view_location">View Location</string>
+    <string name="event_website">Event Website</string>
+    <string name="call">Call</string>
 </resources>

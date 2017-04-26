@@ -54,7 +54,6 @@
         <activity
             android:name=".SellItem"
             android:label="Sell Item" />
-
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
