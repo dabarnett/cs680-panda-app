@@ -10,6 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.AlertDialogLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -286,6 +289,12 @@ public class CreateEvent extends Activity implements PlaceSelectionListener {
         {
             dialog.setTitle("Congrats!");
             dialog.setMessage("Your event was created");
+
+            //connects to the broadcast receiver and sends the correct data to it
+            Intent notifyIntent = new Intent();
+            notifyIntent.putExtra("eventName", userEventTitle);
+            notifyIntent.setAction("com.example.panda.CUSTOM_INTENT");
+            sendBroadcast(notifyIntent);
 
             dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Close",
                                 new DialogInterface.OnClickListener() {
