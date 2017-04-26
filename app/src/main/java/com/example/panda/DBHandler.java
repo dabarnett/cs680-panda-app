@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -17,7 +16,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pandaDB";
     private static final String TABLE_NAME = "Events";
     private static final String ITEM_TABLE_NAME = "Items";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     private Cursor cursor;
     private ContentValues values;
@@ -27,6 +26,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_ID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESC = "description";
+    public static final String KEY_DATE = "event_date";
     public static final String KEY_START = "start_time";
     public static final String KEY_END = "end_time";
     public static final String KEY_ADDRESS = "street_address";
@@ -47,18 +47,19 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     public static final String QUERY_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
-                                                + KEY_ID + " INTEGER primary key autoincrement,"
-                                                + KEY_NAME + " TEXT, "
-                                                + KEY_DESC + " TEXT, "
-                                                + KEY_START + " TEXT, "
-                                                + KEY_END + " TEXT, "
-                                                + KEY_ADDRESS + " TEXT, "
-                                                + KEY_CITY + " TEXT, "
-                                                + KEY_STATE + " TEXT, "
-                                                + KEY_LINK + " TEXT, "
-                                                + KEY_NUMBER + " TEXT, "
-                                                + KEY_STARRED + " TEXT, "
-                                                + IMG_PATH + " TEXT)";
+            + KEY_ID + " INTEGER primary key autoincrement,"
+            + KEY_NAME + " TEXT, "
+            + KEY_DESC + " TEXT, "
+            + KEY_DATE + " TEXT, "
+            + KEY_START + " TEXT, "
+            + KEY_END + " TEXT, "
+            + KEY_ADDRESS + " TEXT, "
+            + KEY_CITY + " TEXT, "
+            + KEY_STATE + " TEXT, "
+            + KEY_LINK + " TEXT, "
+            + KEY_NUMBER + " TEXT, "
+            + KEY_STARRED + " TEXT, "
+            + IMG_PATH + " TEXT)";
 
     public static final String ITEM_QUERY_CREATE_TABLE = "CREATE TABLE " + ITEM_TABLE_NAME + " ("
             + KEY_ITEM_ID + " INTEGER primary key autoincrement,"
@@ -110,50 +111,55 @@ public class DBHandler extends SQLiteOpenHelper {
         // create some new events using the custom event class (Event.java)
         // One of the constructors accepts the name, description, address (street address, city, state) and website link of an event
         addEvent( new Event( "Annual GSA Boston Harbor Cruise",
-                                "Details and tickets to follow soon.",
-                                "1PM",
-                                "10PM",
-                                "60 Rowes Wharf",
-                                "Boston",
-                                "MA",
-                                "https://www.facebook.com/events/238965596572122/",
-                                "781-555-2113",
-                                "Yes",
-                                "event_harborcruise") );
+                "Details and tickets to follow soon.",
+                "6/9/2017",
+                "1PM",
+                "10PM",
+                "60 Rowes Wharf",
+                "Boston",
+                "MA",
+                "https://www.facebook.com/events/238965596572122/",
+                "781-555-2113",
+                "Yes",
+                "event_harborcruise") );
         addEvent( new Event( "Red Sox vs Tampa Bay Rays",
-                                "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
-                                "6PM",
-                                "9PM",
-                                "Fenway Park 4 Yawkey Way",
-                                "Boston",
-                                "MA",
-                                "https://www.facebook.com/events/271118446666257/",
-                                "781-555-2116",
-                                "No",
-                                "event_redsox") );
+                "Come watch a Red Sox Game at the Red Sox Stadium Fenway Park Boston with GSA and start your weekend on a fun note. Tickets are Available on My Bentley",
+                "6/10/2017",
+                "6PM",
+                "9PM",
+                "Fenway Park 4 Yawkey Way",
+                "Boston",
+                "MA",
+                "https://www.facebook.com/events/271118446666257/",
+                "781-555-2116",
+                "No",
+                "event_redsox") );
         addEvent( new Event( "Celebrating Harry Bentley's Birthday",
-                                "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
-                                "3PM",
-                                "8PM",
-                                "Bentley University, 175 Forest Street",
-                                "Waltham",
-                                "MA",
-                                "https://www.facebook.com/events/1016727698433556/",
-                                "781-555-2115",
-                                "No",
-                                "event_harry_bentley") );
+                "A time capsule from Bentley’s 75th anniversary will be on display in the library all day, and students, faculty, staff, alumni, and all other members of our community can use this as inspiration for contributing their own items into Bentley’s Centennial time capsule. We will begin celebrating Harry Bentley’s birthday in the Pub, where there will be cake, food, and the reading of a letter written at Bentley's 75th anniversary.",
+                "6/10/2017",
+                "3PM",
+                "8PM",
+                "Bentley University, 175 Forest Street",
+                "Waltham",
+                "MA",
+                "https://www.facebook.com/events/1016727698433556/",
+                "781-555-2115",
+                "No",
+                "event_harry_bentley") );
         addEvent( new Event( "The Week of World Food",
-                                "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
-                                "2PM",
-                                "5PM",
-                                "Bentley University, 175 Forest St",
-                                "Waltham",
-                                "MA",
-                                "https://www.facebook.com/events/2079322972294483/",
-                                "781-555-2114",
-                                "No",
-                                "event_world_food") );
+                "Please stop by in the smith lobby next week from March 27th to 30th to enjoy GSA's yearly diversity event. Each day we have food from a different region in the world.",
+                "6/11/2017",
+                "2PM",
+                "5PM",
+                "Bentley University, 175 Forest St",
+                "Waltham",
+                "MA",
+                "https://www.facebook.com/events/2079322972294483/",
+                "781-555-2114",
+                "No",
+                "event_world_food") );
 
+        // initialise item table for demo
         addItem( new Item( "Tape Drive",
                 "LTO 4 Tape Drive.",
                 "$400",
@@ -198,8 +204,9 @@ public class DBHandler extends SQLiteOpenHelper {
             values = new ContentValues();
             values.put(KEY_NAME, event.getEventName() );
             values.put(KEY_DESC, event.getEventDescription() );
-            values.put(KEY_START, event.getStartDateTime() );
-            values.put(KEY_END, event.getEndDateTime() );
+            values.put(KEY_DATE, event.getDate() );
+            values.put(KEY_START, event.getStartTime() );
+            values.put(KEY_END, event.getEndTime() );
             values.put(KEY_ADDRESS, event.getStreetAddress() );
             values.put(KEY_CITY, event.getCity() );
             values.put(KEY_STATE, event.getState() );
@@ -281,6 +288,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
                 String desc = cursor.getString(cursor.getColumnIndex(KEY_DESC));
+                String date = cursor.getString(cursor.getColumnIndex(KEY_DATE));
                 String start = cursor.getString(cursor.getColumnIndex(KEY_START));
                 String end = cursor.getString(cursor.getColumnIndex(KEY_END));
                 String addr = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
@@ -293,7 +301,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
 
-                Events.add(new Event(id, name, desc, start, end, addr, city, state, link, nmber, starred, img));
+                Events.add(new Event(id, name, desc, date, start, end, addr, city, state, link, nmber, starred, img));
 
                 Log.d("EVENT: ", Events.get(id - 1).toString() );
             }

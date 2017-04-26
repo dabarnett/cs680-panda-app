@@ -1,15 +1,11 @@
 package com.example.panda;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActivityChooserView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -70,6 +65,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         TextView tvEventCityState = (TextView) row.findViewById(R.id.eventCityState);
         tvEventCityState.setText( event.getCity() + ", " + event.getState() );
+
+        TextView tvEventDate = (TextView) row.findViewById(R.id.eventDate);
+        tvEventDate.setText( event.getDate() );
+
+        TextView tvEventTimeSpan = (TextView) row.findViewById(R.id.eventTimeSpan);
+        tvEventTimeSpan.setText( event.getStartTime() + " - " + event.getEndTime() );
 
         ImageView imgEvent = (ImageView) row.findViewById(R.id.bgEvent);
         if( event.getImagePath() == null || event.getImagePath().isEmpty() )

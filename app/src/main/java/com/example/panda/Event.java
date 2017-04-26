@@ -1,15 +1,14 @@
 package com.example.panda;
 
-import java.text.SimpleDateFormat;
-
 
 public class Event {
 
     private int id;
     private String eventName;
     private String eventDescription;
-    private String startDateTime;
-    private String endDateTime;
+    private String eventDate;
+    private String startTime;
+    private String endTime;
     private String streetAddress;
     private String city;
     private String state;
@@ -21,12 +20,13 @@ public class Event {
 
 
 
-    public Event(int id, String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath){
+    public Event(int id, String eventName, String eventDescription, String eventDate, String startTime, String endTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath){
         this.id = id;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
@@ -37,25 +37,27 @@ public class Event {
     }
 
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred  ){
+    public Event(String eventName, String eventDescription, String eventDate, String startTime, String endTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred  ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
         this.websiteLink = websiteLink;
         this.contactNumber = contactNumber;
-        this.starred = starred;;
+        this.starred = starred;
     }
 
 
-    public Event(String eventName, String eventDescription, String startDateTime, String endDateTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath ){
+    public Event(String eventName, String eventDescription, String eventDate, String startTime, String endTime, String streetAddress, String city, String state, String websiteLink, String contactNumber, String starred, String imagePath ){
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
@@ -96,9 +98,11 @@ public class Event {
 
     public String getContactNumber() {return contactNumber; }
 
-    public String getStartDateTime() {return startDateTime; }
+    public String getDate() {return eventDate; }
 
-    public String getEndDateTime() {return endDateTime; }
+    public String getStartTime() {return startTime; }
+
+    public String getEndTime() {return endTime; }
 
     public String getStarredStatus() {return starred; }
 
@@ -115,7 +119,7 @@ public class Event {
     // this function is mostly for testing purposes. It will print the value of each event object in a string.
     public String toString(){
         return "id: " + id + ", eventName: " + eventName + ", streetAddress: " + streetAddress +
-                ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", startDateTime: " + startDateTime + ", endDateTime: " + endDateTime + ", imagePath: " + imagePath + ", starred: " + starred;
+                ", websiteLink: " + websiteLink + ", contactNumber: " + contactNumber + ", date: " + eventDate + ", startTime: " + startTime + ", endTime: " + endTime + ", imagePath: " + imagePath + ", starred: " + starred;
     }
 
 
