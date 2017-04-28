@@ -249,7 +249,7 @@ public class DBHandler extends SQLiteOpenHelper {
         {
             SQLiteDatabase db = this.getWritableDatabase();
 
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_STARRED + " = 'YES' ", null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_STARRED + " = 'Yes' ", null);
 
 
             while ( cursor.moveToNext() ) {
@@ -269,9 +269,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
 
-                Events.add(new Event(id, name, desc, date, start, end, addr, city, state, link, nmber, starred, img));
+                starredEvents.add(new Event(id, name, desc, date, start, end, addr, city, state, link, nmber, starred, img));
 
-                Log.d("STARRED EVENTS: ", Events.get(id - 1).toString() );
+                Log.d("STARRED EVENTS: ", Integer.toString(starredEvents.size()) );
             }
 
 

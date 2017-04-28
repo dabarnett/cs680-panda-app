@@ -52,6 +52,9 @@
             android:name=".WebLookup"
             android:label="Web" />
         <activity
+            android:name=".ShowStarred"
+            android:label="Starred Events" />
+        <activity
             android:name=".SellItem"
             android:label="Sell Item" />
         <receiver

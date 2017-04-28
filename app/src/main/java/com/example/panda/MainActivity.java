@@ -23,12 +23,10 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     private DBHandler dbHandler;
     private SQLiteDatabase db;
-    //private SQLiteDatabase db2;
     private ArrayList<Event> eventList;
     private ArrayList<Item> itemList;
     private EventAdapter adapter;
     private ItemAdapter itemadapter;
-    private ShowStarred showStarred;
     private ListView eventListView;
     private ListView itemListView;
 
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         spec.setIndicator("Current Events");
         host.addTab(spec);
 
-        //Events Tab
+        //Marketplace Tab
         spec = host.newTabSpec("tabMarketplace");
         spec.setContent(R.id.tabMarketplace);
         spec.setIndicator("Marketplace");
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         try
         {
             db = dbHandler.getWritableDatabase();
-            //db2 = dbHandler.getWritableDatabase();
         }
         catch(SQLException e)
         {
@@ -164,7 +161,8 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             case R.id.action_showStarred:
 
                 Log.d("MENU ACTION", "SHOW STARRED EVENTS SELECTED");
-                showStarred = new ShowStarred(this, R.layout.starred_list_item, eventList);
+                Intent starredListIntent = new Intent(this, ShowStarred.class);
+                startActivity(starredListIntent);
                 speaker.speak("You are now showing starred events", TextToSpeech.QUEUE_FLUSH, null, "New");
                 return true;
 
